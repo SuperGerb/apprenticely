@@ -1,7 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
+import {render} from 'react-dom';
+import App from '../components/App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+$(document).ready(function () {
+    render(<App/>, document.getElementById('root'));
+});
 // ReactDOM.displayTestValue(<App />, document.getElementById('testDiv'));
 

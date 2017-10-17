@@ -128,8 +128,6 @@ axios.post('/create', {
     });
 */
 
-console.log("Server running?");
-
 //Lastly, listen for incoming http requests: 
 app.listen(8080);
 
