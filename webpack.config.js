@@ -2,6 +2,7 @@
     ./webpack.config.js
 */
 const path = require('path');
+var CopyWebpackPlugin = require('copy-webpack-plugin'); //for copying static files to public
 
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -11,10 +12,11 @@ const path = require('path');
 // })
 
 module.exports = {
+    context: __dirname,
     entry: './src/app/index.js',
     output: {
-        path: path.resolve('public/js'),
-        filename: 'bundle.js'
+        path: __dirname + "/public",
+        filename: "bundle.js"
     },
     module: {
         loaders: [
@@ -22,12 +24,17 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
-                query: { 
-                    presets: ["es2015","react"],
+                query: {
+                    presets: ["es2015", "react"],
                 }
             }
         ]
-    }//,
-    //plugins: [HtmlWebpackPluginConfig]
+    },
+    plugins: [
+        new CopyWebpackPlugin([
+            { context: 'src/app/css/', from: '*.css', to: 'css/' },
+            { context: 'src/app/js/', from: '*.js', to: 'js/' },
+            { from: 'src/app/index.html', to: 'index.html' }
+        ])
+    ]
 }
-
