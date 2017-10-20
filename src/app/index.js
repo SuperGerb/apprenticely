@@ -1,9 +1,10 @@
 import React from 'react';
+//import ReactDOM from 'react-dom';
 import {render} from 'react-dom';
 import App from '../components/App';
 
-$(document).ready(function () {
+$(document).ready(function () { 
     render(<App/>, document.getElementById('root'));
 });
-// ReactDOM.displayTestValue(<App />, document.getElementById('testDiv'));
+//ReactDOM.render(<App />, document.getElementById('root'));
 

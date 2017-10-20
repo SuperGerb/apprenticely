@@ -1,42 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>Test Harness Setup</title>
+    <meta charset="utf-8">
+    <title>Test Harness Setup</title>
 </head>
+
 <body>
-<div id="root"> 
+    <div id="root">
 
-</div>
-<button><a href="/display">Display description</a></button><br><br>
-<button><a href="/delete">Delete item with title: Three</a></button><br><br>
-<form action="/confirmationUpdateScreen" method="post">
+    </div>
+    <button><a href="/display">Display description</a></button><br><br>
+    <button><a href="/delete">Delete item with title: Three</a></button><br><br>
+    <form action="/confirmationUpdateScreen" method="post">
         <label for="title2">Enter the title of the item whose desc you'd like to change:</label>
-        <input type="text" id="title2" name="title2"/><br>
+        <input type="text" id="title2" name="title2" /><br>
         <label for="description2">Change description to:</label>
-        <input type="text" id="description2" name="description2"/><br>
+        <input type="text" id="description2" name="description2" /><br>
         <button type="submit">Update description</button><br><br>
-</form>
-<p>Create a classified:</p>
-<form action="/confirmationScreen" method="post">
-    <label for="title">Title:</label>
-    <input type="text" id="title" name="title"/><br>
-    <label for="description">Description:</label>
-    <input type="text" id="description" name="description"/><br>
-    <label for="location">Location:</label>
-    <input type="text" id="location" name="location"/><br>
-    <label for="category">Category:</label>    
-    <input type="text" id="category" name="category"/><br>
-    <label for="type">Type (offered or wanted):</label>    
-    <input type="text" id="type" name="type"/><br>
-    <label for="idPerson">Person id:</label>    
-    <input type="text" id="idPerson" name="idPerson"/><br>
-    <button type="submit">Submit</button>
-</form>
-<br><br>
-<button><a href="/clearAllDocs">Delete all documents in adverts collection of the database</a></button><br><br>
-<button><a href="/loadTestData">Load test data from json file into the database</a></button><br><br>
-<button><a href="/closeConnection">Close database connection</a></button><br><br>
+    </form>
+    <p>Create a classified ad:</p>
+    <form action="/confirmationScreen" method="post">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" /><br>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" /><br>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" /><br>
+        <label for="category">Category:</label>
+        <input type="text" id="category" name="category" /><br>
+        <label for="type">Type (offered or wanted):</label>
+        <input type="text" id="type" name="type" /><br>
+        <label for="idPerson">Person id:</label>
+        <input type="text" id="idPerson" name="idPerson" /><br>
+        <button type="submit">Submit</button>
+    </form>
+    <br><br>
+    <button><a href="/clearAllDocs">Delete all documents in adverts collection of the database</a></button><br><br>
+    <button><a href="/loadTestData">Load test data from json file into the database</a></button><br><br>
+    <button><a href="/closeConnection">Close database connection</a></button><br><br>
 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="bundle.js" charset="utf-8"></script>
 </body>
+
 </html>
