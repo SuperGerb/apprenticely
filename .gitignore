@@ -26,5 +26,3 @@ public/
 .env
 npm-debug.log
 package-lock.json
-src/app/js/
-src/app/css/bootstrap.min.css
