@@ -1,12 +1,23 @@
 //App.js
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import Navigation from './Navigation';
+import ClassifiedAdsList from './ClassifiedAdsList';
+import Searchbar from './Searchbar';
 
 export default class App extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
     render() {
-        return(<h1>"Hello world!"</h1>);
+        return (
+            <div>
+                <Navigation />
+                <div className="container-fluid">
+                    <ClassifiedAdsList />
+                </div>
+                {/*  <!--/.container--> */}
+            </div>
+        )
     }
 }

@@ -1,0 +1,22 @@
+/*BASE STYLES*/
+img{
+	max-width: 100%;
+}
+a:hover,
+a:focus{
+	text-decoration: none;
+}
+
+/* NAVIGATION*/
+.navbar{
+    margin-bottom: 2em;
+}
+.nav li a{
+	cursor: pointer;
+}
+
+/*CLASSIFIED ADS LIST*/
+.classified-list{
+    list-style: none;
+}
+
