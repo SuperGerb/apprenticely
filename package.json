@@ -7,18 +7,22 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "bootstrap": "4.0.0-alpha.6",
+    "concurrently": "^3.5.0",
     "copy-webpack-plugin": "^4.2.0",
     "express": "^4.16.1",
     "html-webpack-plugin": "^2.30.1",
+    "jquery": "^3.2.1",
     "mongodb": "^2.2.31",
+    "node-sass": "^4.5.3",
     "path": "^0.12.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "tether": "^1.4.0",
     "webpack": "^3.6.0"
   },
   "scripts": {
-    "build": "webpack --watch",
-    "start": "nodemon src/server/server.js -e js,html"
+    "start": "concurrently -p \"[{name}]\" -n \"db,app,sass\" \"nodemon src/server/server.js -e js,html\" \"webpack --watch\" \"node-sass --watch src/app/scss/app.scss -o src/app/css\" "
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

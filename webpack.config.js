@@ -2,7 +2,9 @@
     ./webpack.config.js
 */
 const path = require('path');
-var CopyWebpackPlugin = require('copy-webpack-plugin'); //for copying static files to public
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin'); //for copying static files to public
+
 
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -31,6 +33,14 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            Popper: ['popper.js', 'default'],
+            "window.Tether": 'tether',
+            Tether: 'tether'
+        }),
         new CopyWebpackPlugin([
             { context: 'src/app/css/', from: '*.css', to: 'css/' },
             { context: 'src/app/js/', from: '*.js', to: 'js/' },

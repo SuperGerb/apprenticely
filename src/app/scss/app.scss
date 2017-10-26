@@ -1,0 +1,21 @@
+// Settings
+@import "settings/variables";
+
+// Framework
+@import "../../../node_modules/bootstrap/scss/bootstrap"; 
+
+//Custom variables
+@import "settings/customVariables"; 
+
+// Helpers
+@import "helpers/mixins";
+
+// Template Parts
+@import "template-parts/classified-ads-list";
+@import "template-parts/page--footer";
+@import "template-parts/page--header";
+@import "template-parts/page--navigation";
+
+// Templates
+@import "templates/base-styles";
+@import "templates/home";
