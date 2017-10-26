@@ -26,3 +26,4 @@ public/
 .env
 npm-debug.log
 package-lock.json
+yarn-error.log
