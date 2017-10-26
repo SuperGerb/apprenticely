@@ -1,8 +1,9 @@
 //App.js
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom'
 import Navigation from './Navigation';
-import ClassifiedAdsList from './ClassifiedAdsList';
-import Searchbar from './Searchbar';
+import Home from './Home';
+import ClassifiedDetailView from './ClassifiedDetailView';
 
 
 export default class App extends Component {
@@ -15,10 +16,10 @@ export default class App extends Component {
             <div>
                 <Navigation />
                 <div className="container-fluid">
-                    <ClassifiedAdsList />
+                    <Route exact path='/' component={Home} />
+                    <Route path='/classfiedDetailView' component={ClassifiedDetailView} />
                 </div>
-                {/*  <!--/.container--> */}
             </div>
         )
-    }
+    } 
 }
