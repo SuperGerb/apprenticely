@@ -23,11 +23,13 @@ module.exports = {
     module: {
         loaders: [
             {
+                loader: 'babel-loader',
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
                 query: {
                     presets: ["es2015", "react"],
+                    //Required for transforming es2015 static class properties and as properties declared with the es2016 property initializer syntax. (required for interpreting es6 arrow functions):
+                    plugins: ["transform-class-properties"]
                 }
             }
         ]
@@ -48,3 +50,4 @@ module.exports = {
         ])
     ]
 }
+
