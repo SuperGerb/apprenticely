@@ -5993,6 +5993,33 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 .classified-list {
   list-style: none; }
 
+select {
+  height: 36px;
+  width: 100%; }
+
+.custom-file {
+  margin-bottom: 2rem; }
+
+.custom-file-control {
+  width: 15.5rem; }
+
+.custom-file-input {
+  min-width: 15rem;
+  height: 2.5rem;
+  opacity: 1;
+  padding-top: 6px;
+  margin-left: 9.2rem;
+  max-width: 18rem; }
+
+.custom-file-control:before {
+  content: "Browse"; }
+
+.custom-file-control:after {
+  content: "Choose file..."; }
+
+.custom-file-label {
+  display: block; }
+
 /* NAVIGATION*/
 .navbar {
   margin-bottom: 2em; }
@@ -6011,6 +6038,9 @@ img {
 a:hover,
 a:focus {
   text-decoration: none; }
+
+h2 {
+  margin-bottom: 1.5rem; }
 
 h4.card-title {
   color: #5bc0de;
