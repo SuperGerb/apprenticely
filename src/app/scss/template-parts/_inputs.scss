@@ -1,0 +1,31 @@
+select{
+    height: 36px;
+    width: 100%;
+}
+
+ 
+//Custom file input:
+//Used in ClassifiedAdForm. Make sure to check cross-browser compatibility 
+.custom-file{
+    margin-bottom: 2rem;
+}
+.custom-file-control{
+    width: 15.5rem;
+}
+.custom-file-input {
+    min-width: 15rem;
+    height: 2.5rem;
+    opacity: 1;
+    padding-top: 6px;
+    margin-left: 9.2rem;
+    max-width: 18rem;
+}
+.custom-file-control:before {
+    content: "Browse";
+}
+.custom-file-control:after {
+    content: "Choose file...";
+}
+.custom-file-label{
+    display: block;
+}
