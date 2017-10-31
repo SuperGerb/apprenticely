@@ -9,6 +9,7 @@ const path = require("path");
 //Create an instance of Express: 
 var app = express();
 
+var absPathToPublicFolder = path.join(__dirname, '..', '..', 'public');
 //Express is now my web server, not Node, so no need to createServer here at all.
 
 //Configuring Express to use body-parser as middle-ware in order to parse the body of http requests, and therefore be able to fulfill POST requests:
@@ -18,10 +19,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //To serve a static page (index.html):
-app.use(express.static(path.join(__dirname, '..', '..', 'public')));
+app.use(express.static(absPathToPublicFolder));
 
-app.get('\*', function (req, res) {
-    res.sendfile(path.join("public", "index.html"));
+app.get('/', function (req, res) {
+    res.sendFile(path.join(absPathToPublicFolder, "index.html"));
 });
 
 //Configure server:
@@ -53,8 +54,8 @@ app.get('/loadTestData', function (req, res) {
 
 app.get('/display', function (req, res) {
     connection.conn(function (dbConnection) {
-        connection.find(dbConnection, function (descToWrite) {
-            res.send(descToWrite);
+        connection.display(dbConnection, function (data) {
+            res.send(data);
         });
     });
 });
@@ -74,8 +75,8 @@ app.get('/closeConnection', function (req, res) {
     });
 });
 
-//Tells the Express module to wait for an HTTP request at the /confirmationScreen form route, that leverages the POST HTTP verb: 
-app.post('/confirmationScreen', function (req, res) {
+//Tells the Express module to wait for an HTTP request at the /adCreatedConfirmation form route, that leverages the POST HTTP verb: 
+app.post('/adCreatedConfirmation', function (req, res) {
     connection.conn(function (dbConnection) {
         connection.insert(dbConnection, req.body, function (message) {
             //Tell browser what type of data to expect back from the server:
@@ -83,17 +84,16 @@ app.post('/confirmationScreen', function (req, res) {
             //res.send sends the result body back to the user. We are sending a serialized JSON object. To construct this object, we access the body property of the req object, which allows us to parse the properties of the request body
             res.send(JSON.stringify({
                 //Build the JSON for the result object:
+                classifiedId: req.body.classifiedId || null,
                 title: req.body.title || null,
                 description: req.body.description || null,
                 location: req.body.location || null,
                 category: req.body.category || null,
                 type: req.body.type || null,
-                idPerson: req.body.idPerson || null
+                image: req.body.image || null,
+                userId: req.body.userId || null,
+                status: req.body.status || null,
             }));
-            console.log("Req is " + req);
-            console.log("Req.body is " + req.body);
-            console.log('req.body.name', req.body['title']);
-            console.log("Req stringified is " + JSON.stringify(req.body));
             console.log(message + ' New entry added! Title: ' + req.body.title);
         });
     });
@@ -107,26 +107,6 @@ app.post('/confirmationUpdateScreen', function (req, res) {
         console.log("Description updated");
     });
 });
-
-//Next, could send the form using Ajax to avoid the page refresh
-
-//Post requests will require axios or similar (an http service)... I'm using body-parser. 
-/*//Where to put axios -- client side instead? Apparently it can operate on both sides
-axios.post('/create', {
-    "title": "Four",
-    "description": "Banjo players wanted",
-    "location": "Montreal",
-    "category": "music",
-    "type": "wanted",
-    "idPerson": "004"
-    })
-    .then(function (response) {
-        console.log(response);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
-*/
 
 //Lastly, listen for incoming http requests: 
 app.listen(8080);

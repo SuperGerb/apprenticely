@@ -5,6 +5,7 @@ import Navigation from './Navigation';
 import Home from './Home';
 import ClassifiedDetailView from './ClassifiedDetailView';
 import ClassifiedAdForm from './ClassifiedAdForm';
+import AdCreatedConfirmation from './AdCreatedConfirmation';
 
 
 export default class App extends Component {
@@ -20,6 +21,7 @@ export default class App extends Component {
                     <Route exact path='/' component={Home} />
                     <Route path='/classfiedDetailView' component={ClassifiedDetailView} />
                     <Route path='/createClassifiedAd' component={ClassifiedAdForm} />
+                    <Route path='/adCreatedConfirmation' component={AdCreatedConfirmation} />
                 </div>
             </div>
         )

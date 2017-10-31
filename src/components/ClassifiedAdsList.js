@@ -2,25 +2,52 @@ import React, { Component } from 'react';
 import ClassifiedAd from './ClassifiedAd';
 import { Link } from 'react-router-dom';
 
-const ClassifiedAdsList = (props) => (
-    <ul className="row classified-list">
-        <li className="col-xs-6 col-sm-4">
-            <ClassifiedAd />
-        </li>
+class ClassifiedAdsList extends Component {
 
-        {/* A second item added here just for testing!!! (To be removed) */}
-        <li className="col-xs-6 col-sm-4">
-            <div className="card text-center">
-                <img className="card-img-top" src="http://via.placeholder.com/350x150" alt="Image caption" />
-                <div className="card-block">
-                    <h4 className="card-title">Title</h4>
-                    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <Link to="/classfiedDetailView/muralPainting" className="btn btn-primary">Go somewhere</Link>
-                </div>
-                <div className="card-footer text-muted">2 days ago</div>
-            </div>
-        </li>
-    </ul>
-)
+    constructor(props) {
+        super(props);
+        this.state = {
+            listOfAds: []
+        }
+    }
+
+    componentDidMount() {
+        console.log("Mounted");
+        const scope = this;
+
+        fetch('/display', {
+            method: 'get'
+        }).then(function (response) {
+            if (response.status !== 200) {
+                console.log("Problem fetching in the ClassifiedAdsList component");
+            } else {
+                return response.json();
+            }
+        }).then(function (data) {
+            console.log("Fetch in the ClassifiedAdsList component worked.");
+            scope.setState({
+                listOfAds: data
+            });
+        }).catch(function (err) {
+            console.log("The following error occured in the Fetch of the ClassifiedAdsList component: ", err);
+        });
+    }
+
+    render() {
+        const ads = this.state.listOfAds.map(function(value,index){
+            return(
+                <li key={index} className="col-xs-6 col-sm-4">
+                    <ClassifiedAd adDetails = {value} />
+                </li>
+            )
+        });
+
+        return(
+            <ul className="row classified-list">
+               {ads}
+            </ul>
+        )
+    }
+}
 
 export default ClassifiedAdsList;

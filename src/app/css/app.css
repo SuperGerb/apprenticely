@@ -5993,6 +5993,9 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 .classified-list {
   list-style: none; }
 
+.card {
+  margin-bottom: 2em; }
+
 select {
   height: 36px;
   width: 100%; }
