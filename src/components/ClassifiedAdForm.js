@@ -5,7 +5,6 @@ const uuidv4 = require('uuid/v4');
 
 //To do: make location a select
 //To do: deal with file upload (the image)
-//Incorportate uuid library in order to generate unique ID
 //Link to actual userId
 
 class ClassifiedAdForm extends Component {
@@ -56,7 +55,6 @@ class ClassifiedAdForm extends Component {
 
         //Save the current ad to state:
         this.state.currentAd = currentClassifiedAd;
-        console.log("State", this.state);
 
         fetch('/adCreatedConfirmation', {
             method: 'POST',
