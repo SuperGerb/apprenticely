@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import AdCreatedConfirmation from './AdCreatedConfirmation';
+import uuid from 'uuid';
+const uuidv4 = require('uuid/v4');
 
 //To do: make location a select
 //To do: deal with file upload (the image)
@@ -41,7 +43,7 @@ class ClassifiedAdForm extends Component {
         let category = this.state.category !== "" ? this.state.category : this.state.category = "music";
 
         let currentClassifiedAd = {
-            classifiedId: "1",
+            classifiedId: uuidv4(),
             title: this.state.title,
             description: this.state.description,
             location: this.state.location,
