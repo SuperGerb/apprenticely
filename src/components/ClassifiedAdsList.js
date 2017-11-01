@@ -13,7 +13,6 @@ class ClassifiedAdsList extends Component {
     }
 
     componentDidMount() {
-        console.log("Mounted");
         const scope = this;
 
         fetch('/classifiedsListView', {

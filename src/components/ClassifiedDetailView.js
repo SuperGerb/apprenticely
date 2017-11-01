@@ -11,7 +11,6 @@ class ClassifiedDetailView extends Component {
     }
 
     componentDidMount() {
-        console.log("Mounted");
         const scope = this;
         const currentAdId = this.props.match.params.adId;
         const currentAdUrl = '/displayDetailViewClassifiedAd/?id=' + currentAdId;
