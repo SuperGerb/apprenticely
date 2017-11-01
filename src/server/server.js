@@ -52,9 +52,18 @@ app.get('/loadTestData', function (req, res) {
     });
 });
 
-app.get('/display', function (req, res) {
+app.get('/classifiedsListView', function (req, res) {
     connection.conn(function (dbConnection) {
-        connection.display(dbConnection, function (data) {
+        connection.displayListViewClassifieds(dbConnection, function (data) {
+            res.send(data);
+        });
+    });
+});
+
+app.get('/displayDetailViewClassifiedAd/', function (req, res) {
+    let id = req.query.id;
+    connection.conn(function (dbConnection) {
+        connection.displayDetailViewClassifiedAd(dbConnection, id, function (data) {
             res.send(data);
         });
     });

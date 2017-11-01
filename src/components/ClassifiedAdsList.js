@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ClassifiedAd from './ClassifiedAd';
 import { Link } from 'react-router-dom';
+import ClassifiedDetailView from './ClassifiedDetailView';
 
 class ClassifiedAdsList extends Component {
 
@@ -15,7 +16,7 @@ class ClassifiedAdsList extends Component {
         console.log("Mounted");
         const scope = this;
 
-        fetch('/display', {
+        fetch('/classifiedsListView', {
             method: 'get'
         }).then(function (response) {
             if (response.status !== 200) {

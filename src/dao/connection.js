@@ -33,9 +33,15 @@ var connectionObj = {
             callback("Wasn't open to begin with");
         }
     },
-    display: function (db, callback) {
+    displayListViewClassifieds: function (db, callback) {
         var collection = db.collection("adverts");
         collection.find().toArray().then(function (results) {
+            callback(results);
+        });
+    },
+    displayDetailViewClassifiedAd: function (db, id, callback) {
+        var collection = db.collection("adverts");
+        collection.findOne({classifiedId: id}).then(function (results) {
             callback(results);
         });
     },
