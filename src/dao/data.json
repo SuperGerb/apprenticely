@@ -1,28 +1,31 @@
 {
     "adverts" : [
-        {
+        { 
+            "classifiedId": "111",
             "title": "One",
             "description": "Guitar lessons",
             "location": "Montreal",
             "category": "music",
             "type": "offered",
-            "idPerson": "001"
+            "userId": "001"
         },
         {
+            "classifiedId": "222",
             "title": "Two",
             "description": "Book for sale",
             "location": "Montreal",
             "category": "writing",
             "type": "offered",
-            "idPerson": "005"
+            "userId": "005"
         },
         {
+            "classifiedId": "333",
             "title": "Three",
             "description": "Looking for painting lessons",
             "location": "Montreal",
             "category": "painting",
             "type": "wanted",
-            "idPerson": "002"
+            "userId": "002"
         }
     ]
 }

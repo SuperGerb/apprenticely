@@ -33,12 +33,16 @@ var connectionObj = {
             callback("Wasn't open to begin with");
         }
     },
-    find: function (db, callback) {
+    displayListViewClassifieds: function (db, callback) {
         var collection = db.collection("adverts");
-        collection.find({ 'title': 'Three' }).toArray().then(function (results) {
-            var descToWrite = results[0].description;
-            console.log("Description I want to print out: " + descToWrite);
-            callback(descToWrite);
+        collection.find().toArray().then(function (results) {
+            callback(results);
+        });
+    },
+    displayDetailViewClassifiedAd: function (db, id, callback) {
+        var collection = db.collection("adverts");
+        collection.findOne({classifiedId: id}).then(function (results) {
+            callback(results);
         });
     },
     delete: function (db, callback) {
@@ -50,7 +54,7 @@ var connectionObj = {
         });
     },
     insert: function(db, req, callback){
-        var collection = db.collection("adverts");
+        var collection = db.collection("adverts"); 
         collection.insert(req);
         console.log("Req as seen by server is " + req);
         callback("Success!");
