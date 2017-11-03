@@ -60,8 +60,9 @@ app.get('/classifiedsListView', function (req, res) {
     });
 });
 
-app.get('/displayDetailViewClassifiedAd/', function (req, res) {
-    let id = req.query.id;
+ app.get('/displayDetailViewClassifiedAd', function (req, res) {
+     //Recuperate the adId query string from the url:
+    let id = req.query.adId;
     connection.conn(function (dbConnection) {
         connection.displayDetailViewClassifiedAd(dbConnection, id, function (data) {
             res.send(data);
@@ -116,6 +117,11 @@ app.post('/confirmationUpdateScreen', function (req, res) {
         console.log("Description updated");
     });
 });
+
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(absPathToPublicFolder, "index.html"));
+});
+
 
 //Lastly, listen for incoming http requests: 
 app.listen(8080);

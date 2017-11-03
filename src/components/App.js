@@ -19,7 +19,7 @@ export default class App extends Component {
                 <Navigation />
                 <div className="container-fluid">
                     <Route exact path='/' component={Home} />
-                    <Route path='/classfiedDetailView/:adId' component={ClassifiedDetailView} />
+                    <Route path='/classfiedDetailView' component={ClassifiedDetailView} />
                     <Route path='/createClassifiedAd' component={ClassifiedAdForm} />
                     <Route path='/adCreatedConfirmation' component={AdCreatedConfirmation} />
                 </div>

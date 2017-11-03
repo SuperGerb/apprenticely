@@ -12,8 +12,10 @@ class ClassifiedDetailView extends Component {
 
     componentDidMount() {
         const scope = this;
-        const currentAdId = this.props.match.params.adId;
-        const currentAdUrl = '/displayDetailViewClassifiedAd/?id=' + currentAdId;
+        //Extract the query string from the url:
+        const currentAdId = this.props.history.location.search;
+        //Pass the query string in the http request along with the route:
+        const currentAdUrl = '/displayDetailViewClassifiedAd' + currentAdId;
 
         fetch(currentAdUrl, {
             method: 'get'

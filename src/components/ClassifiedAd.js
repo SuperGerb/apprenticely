@@ -5,8 +5,7 @@ const ClassifiedAd = (props) => {
     const { adDetails } = props;
     //Equivalent to const adDetails = props.adDetails;
     const { classifiedId, title, description, location, category, type, image, userId, status} = adDetails;
-
-    const detailViewUrl = "/classfiedDetailView/" + classifiedId;
+    const detailViewUrl = "/classfiedDetailView?adId=" + classifiedId;
 
     return (
         <div className="card text-center" >
