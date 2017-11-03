@@ -21,6 +21,7 @@ class ClassifiedAdForm extends Component {
             image: "",
             userId: "",
             status: "",
+            datePosted: "",
             currentAd: {}
         }
     }
@@ -41,6 +42,8 @@ class ClassifiedAdForm extends Component {
 
         let category = this.state.category !== "" ? this.state.category : this.state.category = "music";
 
+        let currentDate = new Date();
+
         let currentClassifiedAd = {
             classifiedId: uuidv4(),
             title: this.state.title,
@@ -50,7 +53,8 @@ class ClassifiedAdForm extends Component {
             type: this.state.type,
             image: this.state.image,
             userId: "123",
-            status: "open"
+            status: "open",
+            datePosted: currentDate
         }
 
         //Save the current ad to state:
@@ -101,7 +105,7 @@ class ClassifiedAdForm extends Component {
                                 <br />
                                 <label htmlFor="description">Description</label>
                                 <div className="input-group">
-                                    <input type="text" value={this.state.description} className="form-control" id="description" name="description" aria-describedby="basic-addon1" onChange={this.handleChangeInput} />
+                                    <textarea value={this.state.description} className="form-control" id="description" name="description" aria-describedby="basic-addon1" onChange={this.handleChangeInput}></textarea>
                                 </div>
                                 <br />
                                 <label htmlFor="location">Location</label>
@@ -141,10 +145,10 @@ class ClassifiedAdForm extends Component {
                                 <input type="hidden" value={this.state.userId} className="form-control" id="userId" name="userId" />
                                 <input type="hidden" value={this.state.status} className="form-control" id="status" name="status" />
                                 <label htmlFor="image" className="custom-file-label">Upload an image</label>
-                                {/* <div className="custom-file">
+                                <div className="custom-file">
                                     <input type="file" id="image" name="image" className="custom-file-input" />
                                     <span className="custom-file-control"></span>
-                                </div> */}
+                                </div>
                                 <br />
                                 <button type="submit" className="btn btn-primary" id="addClassifiedAd" onClick={this.handleSubmitNewAd}>Create ad</button>
                             </form>
