@@ -1,0 +1,98 @@
+{
+    "taxonomyUiLabel": "interests",
+    "categories": {
+        "music": {
+           "catCode": "001",
+            "uiLabel": "Music",
+            "terms": [
+                "rock", "alternative", "folk", "singer songwriter", "blues", "jazz", "heavy metal", "punk", "ska", "reggae", "pop", "synth", "soul", "indie", "guitar", "piano", "keyboard", "flute", "trombone", "saxophone", "oboe", "clarinet", "lute", "tambourine", "violin", "viola", "drums", "bass", "singer", "guitarist", "pianist", "keyboard player", "flutist", "drummer", "bass player", "violinist", "percussionist"
+             ]
+        },
+        "writing": {
+            "catCode": "002",
+            "uiLabel": "Writing",
+            "terms": ["novel", "short story", "prose", "poetry"]
+        },
+        "photography": {
+            "catCode": "003",
+            "uiLabel": "Photography",
+            "terms": ["landscape", "portrait", "wildlife", "city scapes", "nature", "animal", "baby", "children", "pets"]
+        },
+        "video": {
+            "catCode": "004",
+            "uiLabel": "Video",
+            "terms": ["documentary", "drama", "comedy", "animation", "animated", "feature", "short", "film"]
+        },
+        "fineArt": {
+            "catCode": "005",
+            "uiLabel": "Fine Art (Drawing, Painting, Sculpture, Printmaking)",
+            "terms": [
+                "drawing", "sketch", "sketching", "charcoal", "pencil crayon","felt", "marker", "figure", "pastels","painting", "oil", "acrylic", "watercolour", "sculpture", "clay", "statue", "relief", "ice", "bronze", "ivory", "marble", "stone", "terracotta", "wood-carving", "printmaking", "print", "mural", "modernist", "cubist", "expressionist", "fauvist", "surrealist", "pop art", "impressionism", "conceptual", "photorealist", "minimalist", "abstract", "realist",  "naive"
+            ]
+        },
+        "acting": {
+            "catCode": "006",
+            "uiLabel": "Acting",
+            "terms": ["clown", "clowning", "improv", "performance art"]
+        },
+        "textiles": {
+            "catCode": "007",
+            "uiLabel": "Textiles",
+            "terms": [
+                "knitted", "woven", "crochetted", "sewn",
+                "socks", "sweater", "mittens", "leg warmers", "hat", "tuque", "scarf",
+                "linens", "quilt", "tablecloth", "carpet",
+                "tapestry"
+            ]
+        },
+        "woodcraft": {
+            "catCode": "008",
+            "uiLabel": "Woodcraft",
+            "terms": [
+                "furniture", "table", "chair", "light fixture", "lamp", "utensils"
+            ]
+        },
+        "papercraft": {
+            "catCode": "009",
+            "uiLabel": "Papercraft",
+            "terms": [
+                "paper", "origami"
+            ]
+        },
+        "metalwork": {
+            "catCode": "010",
+            "uiLabel": "Metalwork",
+            "terms": [
+                "gold", "silver", "bronze"
+            ]
+        },
+        "potteryGlass": {
+            "catCode": "011",
+            "uiLabel": "Pottery and Glass",
+            "terms": [
+                "pottery", "ceramic", "glass", "stained glass"
+            ]
+        },
+        "jewellery": {
+            "catCode": "012",
+            "uiLabel": "Jewellery",
+            "terms": [
+                "gold", "silver", "bronze", "gemstones"
+            ]
+        },
+        "maker": {
+            "catCode": "013",
+            "uiLabel": "Maker (Electronics, Digital printing, Laser cutting)",
+            "terms": [
+                "electronics", "circuit board", "led", "robot", "digital printing", "laser cutting"
+            ]
+        },
+        "mixedMedia": {
+            "catCode": "014",
+            "uiLabel": "Mixed Media",
+            "terms": [
+                "collage"
+            ]
+        }
+    }
+}

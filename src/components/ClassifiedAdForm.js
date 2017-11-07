@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AdCreatedConfirmation from './AdCreatedConfirmation';
+//import "../server/taxonomy.json";
 import uuid from 'uuid';
 const uuidv4 = require('uuid/v4');
 
@@ -17,6 +18,7 @@ class ClassifiedAdForm extends Component {
             description: "",
             location: "",
             category: "",
+            categories: [],
             type: "",
             image: "",
             userId: "",
@@ -24,6 +26,30 @@ class ClassifiedAdForm extends Component {
             datePosted: "",
             currentAd: {}
         }
+    }
+
+    componentDidMount(){
+        const scope = this;
+        fetch('/accessTaxonomy',{
+            method: 'get'
+        }).then(function (response) {
+            if (response.status !== 200) {
+                console.log("Problem fetching the taxonomy in the ClassifiedAdForm component");
+            } else {
+                return response.json();
+            }
+        }).then(function(taxonomyObject){
+            let classifiedCategories = [];
+            for(let key in taxonomyObject.categories){
+                let categoryName = taxonomyObject.categories[key].uiLabel;
+                classifiedCategories.push(categoryName);
+            }
+            scope.setState({
+                categories: classifiedCategories
+            });
+        }).catch(function(err){
+            console.log("Error in componentDidMount of ClassifiedAdForm: ", err);
+        });
     }
 
     handleChangeInput = (event) => {
@@ -91,6 +117,9 @@ class ClassifiedAdForm extends Component {
         if (this.state.submitted == true) {
             return <AdCreatedConfirmation />
         } else {
+            const categoryOptionsArray = (this.state.categories).map(function(value, index){
+                return <option key={index} value={value}>{value}</option>;
+            });
             return (
                 <div className="col-sm-8 offset-sm-2">
                     <div className="card">
@@ -124,21 +153,7 @@ class ClassifiedAdForm extends Component {
                                 <label htmlFor="category">Category</label>
                                 <div className="input-group">
                                     <select id="category" name="category" onChange={this.handleChangeInput} >
-                                        <option value="music">Music</option>
-                                        <option value="writing">Writing</option>
-                                        <option value="photography">Photography</option>
-                                        <option value="video">Video</option>
-                                        <option value="fineArt">Fine Art (Drawing, Painting, Sculpture, Printmaking)</option>
-                                        <option value="acting">Acting</option>
-                                        <option value="textiles">Textiles</option>
-                                        <option value="woodcraft">Woodcraft</option>
-                                        <option value="papercraft">Papercraft</option>
-                                        <option value="metalwork">Metalwork</option>
-                                        <option value="potteryAndGlass">Pottery and Glass</option>
-                                        <option value="jewellery">Jewellery</option>
-                                        <option value="maker">Maker (Electronics, Digital printing, Laser cutting)</option>
-                                        <option value="mixedMedia">Mixed Media</option>
-                                        <option value="other">Other</option>
+                                        {categoryOptionsArray}
                                     </select>
                                 </div>
                                 <br />
