@@ -45,9 +45,9 @@ const ClassifiedAd = (props) => {
             for (let i = limit; i > 0; i--) {
                 if (text.charAt(i) === " ") {
                     if (otherPunctuationMarks.test(text.charAt(i - 1) === true)) {
-                        return text.slice(0, limit - 1) + "...";
+                        return text.slice(0, i - 1) + "...";
                     } else if (endOfSentence.test(text.charAt(i - 1)) === false) {
-                        return text.slice(0, limit) + "...";
+                        return text.slice(0, i) + "...";
                     }
                 }
             }

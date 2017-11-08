@@ -29,6 +29,15 @@ app.get('/', function (req, res) {
 // GET method route
 //These http request handlers simply use Express, not any routers:
 //(They use express's get method, which routes HTTP GET requests to the specified path with the specified callback functions)
+app.get('/accessTaxonomy', function(req, res){
+    fs.readFile((__dirname + '/taxonomy.json'), 'utf8', function (err, data) {
+        if (err) {
+            throw err;
+            console.log("Problem reading taxonomy file.");
+        }
+        res.send(data);
+    });
+});
 
 app.get('/test', function (req, res) {
     connection.conn(function (dbConnection) {
@@ -77,7 +86,6 @@ app.get('/delete', function (req, res) {
         });
     });
 });
-
 
 app.get('/closeConnection', function (req, res) {
     connection.close(function (message) {
