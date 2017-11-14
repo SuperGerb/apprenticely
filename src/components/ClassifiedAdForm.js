@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AdCreatedConfirmation from './AdCreatedConfirmation';
-//import "../server/taxonomy.json";
+import { makeDroppable } from "../app/utilities/drag-and-drop.js";
 import uuid from 'uuid';
 const uuidv4 = require('uuid/v4');
 
@@ -20,7 +20,8 @@ class ClassifiedAdForm extends Component {
             category: "",
             categories: [],
             type: "",
-            image: "",
+            images: "",
+            previewImage: "",
             userId: "",
             status: "",
             datePosted: "",
@@ -28,9 +29,10 @@ class ClassifiedAdForm extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         const scope = this;
-        fetch('/accessTaxonomy',{
+        //Fill the category select with the options from the taxonomy.json file on the server:
+        fetch('/accessTaxonomy', {
             method: 'get'
         }).then(function (response) {
             if (response.status !== 200) {
@@ -38,18 +40,60 @@ class ClassifiedAdForm extends Component {
             } else {
                 return response.json();
             }
-        }).then(function(taxonomyObject){
+        }).then(function (taxonomyObject) {
             let classifiedCategories = [];
-            for(let key in taxonomyObject.categories){
+            for (let key in taxonomyObject.categories) {
                 let categoryName = taxonomyObject.categories[key].uiLabel;
                 classifiedCategories.push(categoryName);
             }
             scope.setState({
                 categories: classifiedCategories
             });
-        }).catch(function(err){
+        }).catch(function (err) {
             console.log("Error in componentDidMount of ClassifiedAdForm: ", err);
         });
+
+        //Create the drag and drop zone for the image uploads:
+        let dropZone = document.getElementById("file-drop-zone");
+        makeDroppable(dropZone, 'classifiedAdFileInput', addUploadedFilesToState);
+
+        //Callback for when files are dropped on the drag and drop zone:
+
+        //For testing: show a preview of the images in the browser:
+        const imageInput = document.getElementById("classifiedAdFileInput");
+
+        function addUploadedFilesToState(files) {
+            //Get rid of preview and use this when multiple images are involved:
+            /*scope.setState({
+                images: files
+            });
+            console.log("In state, the files are: ", scope.state.images);*/
+          
+            //For testing with one image: shows a preview of the images in the browser:
+            //To do: improve this promise. Add reject. If no files uploaded... 
+            let previewUrl = "";
+            let getDataUrlOfUploadedImage = new Promise((resolve, reject) => {
+                //This is just going to get the last image that was added via the fileselector window (ie clicking in the drop zone):
+                if (files && files[0]) {
+                    //console.log("imageInput.files= ", files);
+                    let reader = new FileReader();
+
+                    reader.readAsDataURL(files[0]);
+
+                    reader.onload = function (e) {
+                        //console.log("e.target.result= ", e.target.result);
+                        resolve(previewUrl = e.target.result);
+                    };
+                }
+            }).then((urlForImagePreview) => {
+                scope.setState({
+                    images: files,
+                    previewImage: previewUrl
+                });
+                console.log("In state, the files are: ", scope.state.images);
+                console.log("In state, the preview image is: ", scope.state.previewImage);
+            });
+        }
     }
 
     handleChangeInput = (event) => {
@@ -77,7 +121,7 @@ class ClassifiedAdForm extends Component {
             location: this.state.location,
             category: this.state.category,
             type: this.state.type,
-            image: this.state.image,
+            images: this.state.images,
             userId: "123",
             status: "open",
             datePosted: currentDate
@@ -86,38 +130,56 @@ class ClassifiedAdForm extends Component {
         //Save the current ad to state:
         this.state.currentAd = currentClassifiedAd;
 
-        fetch('/adCreatedConfirmation', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.state.currentAd)
-        }).then(function (response) {
-            return response.json();
-        }).then(function () {
-            //Set submitted to true and clear the currentAd object to make way for the next form submission:
-            scope.setState({
-                submitted: true,
-                currentAd: {}
-                //If necessary, clear the form inputs:
-                // classifiedId: "",
-                // title: "",
-                // description: "",
-                // location: "",
-                // category: "",
-                // type: "",
-                // image: "",
-                // userId: "",
-                // status: "",
-            });
+        //Encoding the data as multipart/form-data:
+        const formData = new FormData();
+
+        Object.keys(currentClassifiedAd).forEach((key) => {
+            if(currentClassifiedAd[key] instanceof File){
+                console.log("Found file and it is: ", key);
+            }else if(currentClassifiedAd[key] instanceof FileList){
+                console.log("Found fileList and it is: ", key);
+                formData.append(key, currentClassifiedAd[key][0], currentClassifiedAd[key][0].name);
+            }else{
+                console.log("This is key data: ", key);
+                formData.append(key, currentClassifiedAd[key])
+            }
         });
+
+        console.log("Contents of FormData: ");
+
+        // for (var pair of formData.entries()) {
+        //     console.log(pair[0] + ', ' + pair[1]);
+        // }
+
+        fetch('/adCreatedConfirmation', {
+             method: 'POST',
+             body: formData
+         }).then(function (response) {
+            //return response.json();
+         }).then(function () {
+             //Set submitted to true and clear the currentAd object to make way for the next form submission:
+             scope.setState({
+                 submitted: true,
+                 currentAd: {}
+                 //If necessary, clear the form inputs:
+                 // classifiedId: "",
+                 // title: "",
+                 // description: "",
+                 // location: "",
+                 // category: "",
+                 // type: "",
+                 // image: "",
+                 // userId: "",
+                 // status: "",
+             });
+         });
     }
 
     render() {
         if (this.state.submitted == true) {
             return <AdCreatedConfirmation />
         } else {
-            const categoryOptionsArray = (this.state.categories).map(function(value, index){
+            const categoryOptionsArray = (this.state.categories).map(function (value, index) {
                 return <option key={index} value={value}>{value}</option>;
             });
             return (
@@ -159,11 +221,10 @@ class ClassifiedAdForm extends Component {
                                 <br />
                                 <input type="hidden" value={this.state.userId} className="form-control" id="userId" name="userId" />
                                 <input type="hidden" value={this.state.status} className="form-control" id="status" name="status" />
-                                <label htmlFor="image" className="custom-file-label">Upload an image</label>
-                                <div className="custom-file">
-                                    <input type="file" id="image" name="image" className="custom-file-input" />
-                                    <span className="custom-file-control"></span>
+                                <div className="droppable" id="file-drop-zone">
+                                    <p>Drop images to upload here</p>
                                 </div>
+                                <img src={this.state.previewImage} id="profile-img-tag" width="200px" />
                                 <br />
                                 <button type="submit" className="btn btn-primary" id="addClassifiedAd" onClick={this.handleSubmitNewAd}>Create ad</button>
                             </form>

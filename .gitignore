@@ -23,6 +23,7 @@ $RECYCLE.BIN/
 #################
 node_modules/
 public/
+src/server/classifiedImageUploads/
 .env
 npm-debug.log
 package-lock.json

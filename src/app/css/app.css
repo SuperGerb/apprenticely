@@ -6000,28 +6000,25 @@ select {
   height: 36px;
   width: 100%; }
 
-.custom-file {
-  margin-bottom: 2rem; }
+.droppable {
+  background: #f8f8f8;
+  background: #5cb85c;
+  color: white;
+  padding: 3em 0;
+  text-align: center;
+  width: 100%; }
 
-.custom-file-control {
-  width: 15.5rem; }
+.droppable.dragover {
+  background: #ffd500; }
 
-.custom-file-input {
-  min-width: 15rem;
-  height: 2.5rem;
-  opacity: 1;
-  padding-top: 6px;
-  margin-left: 9.1rem;
-  max-width: 18rem; }
+.droppable.contains-file {
+  background: #5bc0de; }
 
-.custom-file-control:before {
-  content: "Browse"; }
+.droppable.dragover.contains-file {
+  background: #ffd500; }
 
-.custom-file-control:after {
-  content: "Choose file..."; }
-
-.custom-file-label {
-  display: block; }
+.droppable p {
+  margin-bottom: 0; }
 
 /* NAVIGATION*/
 .navbar {

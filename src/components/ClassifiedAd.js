@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 const ClassifiedAd = (props) => {
     const { adDetails } = props;
     //Equivalent to const adDetails = props.adDetails;
-    const { classifiedId, title, description, location, category, type, image, userId, status, datePosted } = adDetails;
+    const { classifiedId, title, description, location, category, type, images, userId, status, datePosted } = adDetails;
     const detailViewUrl = "/classfiedDetailView?adId=" + classifiedId;
+    const imageSrc = "/images/classifiedImageUploads/" + images;
     //Convert the datePosted string from the database back into a js Date object: 
     const dateAdWasPosted = new Date(datePosted);
     const todaysDate = new Date();
@@ -60,7 +61,7 @@ const ClassifiedAd = (props) => {
 
     return (
         <div className="card text-center" >
-            <img className="card-img-top" src="http://via.placeholder.com/350x150" alt="Image caption" />
+            <img className="card-img-top" src={imageSrc} alt="Image caption" />
             <div className="card-block">
                 <h4 className="card-title">{title}</h4>
                 <p className="card-text">{shortDesc}</p>

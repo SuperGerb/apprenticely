@@ -46,7 +46,8 @@ module.exports = {
         new CopyWebpackPlugin([
             { context: 'src/app/css/', from: '*.css', to: 'css/' },
             { context: 'src/app/js/', from: '*.js', to: 'js/' },
-            { from: 'src/app/index.html', to: 'index.html' }
+            { from: 'src/app/index.html', to: 'index.html' },
+            { context: 'src/server/classifiedImageUploads/', from: '*', to: 'images/classifiedImageUploads/' }
         ])
     ]
 }

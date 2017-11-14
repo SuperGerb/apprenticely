@@ -6,9 +6,7 @@ import {Link} from 'react-router-dom';
 
 const AdCreatedConfirmation = (props) => (
     <div>
-        <h1>{props.title} Ad successfully created!</h1>
-        {/* Not working yet: */}
-        {/* <Link to="/createClassifiedAd" className="btn btn-primary">Create another classified ad</Link> */}
+        <h2>{props.title} Ad successfully created!</h2>
     </div>
 )
 
