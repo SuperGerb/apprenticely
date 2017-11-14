@@ -1,4 +1,3 @@
-//1. Require les modules comme mysql et express :
 var http = require('http');
 var fs = require('fs'); //Node's file system module
 var mongodb = require('mongodb');
@@ -7,6 +6,7 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var connection = require('../dao/connection.js');
 const path = require('path');
+const uuidv4 = require('uuid/v4');
 //Create an instance of Express: 
 var app = express();
 
@@ -18,10 +18,9 @@ const storageForImageFiles = multer.diskStorage({
         cb(null, 'src/server/classifiedImageUploads/')
     },
     filename: function (req, file, cb) {
-        let startOfExtension = (file.originalname).lastIndexOf('.');
+        let startOfExtension = (file.originalname).length -(file.originalname).lastIndexOf('.');
         let extension = (file.originalname).slice(-startOfExtension);
-        //To do: generate a more unique filename! 
-        cb(null, new Date().getTime() + extension);
+        cb(null, uuidv4() + extension);
     }
 });
 
