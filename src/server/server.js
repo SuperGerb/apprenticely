@@ -17,24 +17,24 @@ const storageForImageFiles = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'src/server/classifiedImageUploads/')
     },
+    //Give the each file a unique name, and conserve its file type extension:
     filename: function (req, file, cb) {
         let startOfExtension = (file.originalname).length -(file.originalname).lastIndexOf('.');
         let extension = (file.originalname).slice(-startOfExtension);
         cb(null, uuidv4() + extension);
     }
 });
-
 const uploadsFolder = multer({ storage: storageForImageFiles });
 
-//And the maximum number of images a user can upload when creating a classified ad:
+//Specify the maximum number of images a user can upload when creating a classified ad:
 const maxImageUploads = 100;
 
 //Express is now my web server, not Node, so no need to createServer here at all.
 
-//Configuring Express to use body-parser as middle-ware in order to parse the body of http requests, and therefore be able to fulfill POST requests:
+//Configuring Express to use body-parser as middle-ware in order to parse the body of http requests, and therefore be able to fulfill basic POST requests. (For multipart form data, Multer is used.):
 //Support parsing of application/json type post data:
 app.use(bodyParser.json());
-//Support parsing of application/x-www-form-urlencoded post data: (My post request uses this one):
+//Support parsing of application/x-www-form-urlencoded post data: 
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //To serve a static page (index.html):
@@ -46,8 +46,7 @@ app.get('/', function (req, res) {
 
 //Configure server:
 // GET method route
-//These http request handlers simply use Express, not any routers:
-//(They use express's get method, which routes HTTP GET requests to the specified path with the specified callback functions)
+//These http request handlers simply use Express, not any routers. (They use express's get method, which routes HTTP GET requests to the specified path with the specified callback functions):
 app.get('/accessTaxonomy', function (req, res) {
     fs.readFile((__dirname + '/taxonomy.json'), 'utf8', function (err, data) {
         if (err) {
@@ -113,23 +112,22 @@ app.get('/closeConnection', function (req, res) {
 });
 
 //Tells the Express module to wait for an HTTP request at the /adCreatedConfirmation form route, that leverages the POST HTTP verb: 
-app.post('/adCreatedConfirmation', uploadsFolder.single('images'), function (req, res) {
+app.post('/adCreatedConfirmation', uploadsFolder.array('images', maxImageUploads), function (req, res) {
     //Deal with the file uploads (the images):
     let requestBody = req.body;
     let dataToSave = {};
 
-    //I could change this to map():
     Object.keys(requestBody).forEach((key) => {
         dataToSave[key] = requestBody[key];
     });
 
-    if (req.file !== undefined) {
-        dataToSave["images"] = req.file.filename;
+    if (req.files !== undefined) {
+        let images = req.files;
+        let numberOfImages = images.length;
+        for(let i = 0; i < numberOfImages; i++){
+            dataToSave["image" + i] = images[i].filename;
+        }
     }
-
-    //Next, try uploading an array of files!
-    // Not sure this is still correct:
-    //Using multer, req.files would contain an array of files if I used multiple file inputs in my form. Instead I use a drag and drop zone and save all the files to an array before putting them in the FormData object (key = "images") and sending them to the server. So they're accessible instead via req.body.images
 
     connection.conn(function (dbConnection) {
         connection.insert(dbConnection, dataToSave, function (message) {

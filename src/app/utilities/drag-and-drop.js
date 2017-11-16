@@ -41,30 +41,23 @@ export function makeDroppable(element, inputName, callback) {
     });
 
     function triggerCallback(event) {
-        //var files;
-        console.log("Files is at first: ", files);
         //Check if the event that called this function has a dataTransfer object. If it does, it means the files were selected by dropping them on an element. If not, they were selected through the file chooser window. In either case, push loop through the FileList and push each file onto the files array:
         if (event.dataTransfer) {
-            //files.push(event.dataTransfer.files);
             let listOfFiles = event.dataTransfer.files;
             let fileListLength = listOfFiles.length;
             for(let i = 0; i < fileListLength; i++){
-                console.log("List of files is: ", listOfFiles[i]);
                 files.push(listOfFiles[i]);
             }
         } else if (event.target) {
-            files = event.target.files;
-            // let listOfFiles = event.target.files;
-            // let fileListLength = listOfFiles.length;
-            // for(let i = 0; i < fileListLength; i++){
-            //     console.log("List of files is: ", listOfFiles[i]);
-            //     files.push(listOfFiles[i]);
-            // }
+            let listOfFiles = event.target.files;
+            let fileListLength = listOfFiles.length;
+            for(let i = 0; i < fileListLength; i++){
+                files.push(listOfFiles[i]);
+            }
         }
-        console.log("files = ", files);
         //Pass the files variable to the callback function provided. The call() method calls a function with a given this value and arguments provided individually:
         callback.call(null, files);
     }
 }
 
-//To do: check if the dropped item is a folder, and if so extract the files so they can be uploaded
+//To do: add functionality for folders. Check if the dropped item is a folder, and if so extract the files so they can be uploaded

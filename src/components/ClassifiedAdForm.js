@@ -5,7 +5,6 @@ import uuid from 'uuid';
 const uuidv4 = require('uuid/v4');
 
 //To do: make location a select
-//To do: deal with file upload (the image)
 //Link to actual userId
 
 class ClassifiedAdForm extends Component {
@@ -20,7 +19,7 @@ class ClassifiedAdForm extends Component {
             category: "",
             categories: [],
             type: "",
-            images: "",
+            images: [],
             previewImage: "",
             userId: "",
             status: "",
@@ -57,29 +56,24 @@ class ClassifiedAdForm extends Component {
         let dropZone = document.getElementById("file-drop-zone");
         makeDroppable(dropZone, 'classifiedAdFileInput', addUploadedFilesToState);
 
+        //Enable for showing a preview of an image in the browser: (1/2):
+        //const imageInput = document.getElementById("classifiedAdFileInput");
+
         //Callback for when files are dropped on the drag and drop zone:
-
-        //For testing: show a preview of the images in the browser:
-        const imageInput = document.getElementById("classifiedAdFileInput");
-
         function addUploadedFilesToState(files) {
-            //Get rid of preview and use this when multiple images are involved:
-            /*scope.setState({
+            scope.setState({
                 images: files
             });
-            console.log("In state, the files are: ", scope.state.images);*/
-          
-            //For testing with one image: shows a preview of the images in the browser:
-            //To do: improve this promise. Add reject. If no files uploaded... 
+            //Enable for showing a preview of an image in the browser: (2/2):
+            /*//For testing with one image: shows a preview of the image in the browser:
+            //To do: Could extend this to preview multiple images. Also improve add in the reject (if no files uploaded, etc). 
             let previewUrl = "";
             let getDataUrlOfUploadedImage = new Promise((resolve, reject) => {
-                //This is just going to get the last image that was added via the fileselector window (ie clicking in the drop zone):
+                //This is just going to get the last image that was added via the file selector window (ie clicking in the drop zone):
                 if (files && files[0]) {
                     //console.log("imageInput.files= ", files);
                     let reader = new FileReader();
-
                     reader.readAsDataURL(files[0]);
-
                     reader.onload = function (e) {
                         //console.log("e.target.result= ", e.target.result);
                         resolve(previewUrl = e.target.result);
@@ -92,7 +86,7 @@ class ClassifiedAdForm extends Component {
                 });
                 console.log("In state, the files are: ", scope.state.images);
                 console.log("In state, the preview image is: ", scope.state.previewImage);
-            });
+            });*/
         }
     }
 
@@ -134,45 +128,49 @@ class ClassifiedAdForm extends Component {
         const formData = new FormData();
 
         Object.keys(currentClassifiedAd).forEach((key) => {
-            if(currentClassifiedAd[key] instanceof File){
-                console.log("Found file and it is: ", key);
-            }else if(currentClassifiedAd[key] instanceof FileList){
-                console.log("Found fileList and it is: ", key);
-                formData.append(key, currentClassifiedAd[key][0], currentClassifiedAd[key][0].name);
-            }else{
-                console.log("This is key data: ", key);
+            //Loop through the image array and if it contains files, then extract them and add them individually to the formData object, along with the information necessary for the server to identify them as image files (ie. the name property):
+            if (key === "images") {
+                let images = currentClassifiedAd[key];
+                let numberOfImages = currentClassifiedAd[key].length;
+                for (let i = 0; i < numberOfImages; i++) {
+                    if (images[i] instanceof File) {
+                        formData.append("images", images[i], images[i].name);
+                    }
+                }
+                //Append all the other form field key, value pairs to the formData object:
+            } else {
                 formData.append(key, currentClassifiedAd[key])
             }
         });
 
-        console.log("Contents of FormData: ");
-
-        // for (var pair of formData.entries()) {
+        // For testing:
+        // console.log("Contents of FormData: ");
+        // for (let pair of formData.entries()) {
         //     console.log(pair[0] + ', ' + pair[1]);
         // }
 
         fetch('/adCreatedConfirmation', {
-             method: 'POST',
-             body: formData
-         }).then(function (response) {
+            method: 'POST',
+            body: formData
+        }).then(function (response) {
             //return response.json();
-         }).then(function () {
-             //Set submitted to true and clear the currentAd object to make way for the next form submission:
-             scope.setState({
-                 submitted: true,
-                 currentAd: {}
-                 //If necessary, clear the form inputs:
-                 // classifiedId: "",
-                 // title: "",
-                 // description: "",
-                 // location: "",
-                 // category: "",
-                 // type: "",
-                 // image: "",
-                 // userId: "",
-                 // status: "",
-             });
-         });
+        }).then(function () {
+            //Set submitted to true and clear the currentAd object to make way for the next form submission:
+            scope.setState({
+                submitted: true,
+                currentAd: {}
+                //If necessary, clear the form inputs:
+                // classifiedId: "",
+                // title: "",
+                // description: "",
+                // location: "",
+                // category: "",
+                // type: "",
+                // image: "",
+                // userId: "",
+                // status: "",
+            });
+        });
     }
 
     render() {
@@ -224,7 +222,7 @@ class ClassifiedAdForm extends Component {
                                 <div className="droppable" id="file-drop-zone">
                                     <p>Drop images to upload here</p>
                                 </div>
-                                <img src={this.state.previewImage} id="profile-img-tag" width="200px" />
+                                <img src={this.state.previewImage} id="preview-img-tag" width="200px" />
                                 <br />
                                 <button type="submit" className="btn btn-primary" id="addClassifiedAd" onClick={this.handleSubmitNewAd}>Create ad</button>
                             </form>
