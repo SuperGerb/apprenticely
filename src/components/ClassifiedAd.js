@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const ClassifiedAd = (props) => {
     const { adDetails } = props;
     //Equivalent to const adDetails = props.adDetails;
-    const { classifiedId, title, description, location, category, type, images, userId, status, datePosted } = adDetails;
+    const { classifiedId, title, description, location, category, type, image0, userId, status, datePosted } = adDetails;
     const detailViewUrl = "/classfiedDetailView?adId=" + classifiedId;
-    const imageSrc = "/images/classifiedImageUploads/" + images;
+    const imageSrc = "/images/classifiedImageUploads/" + image0;
     //Convert the datePosted string from the database back into a js Date object: 
     const dateAdWasPosted = new Date(datePosted);
     const todaysDate = new Date();

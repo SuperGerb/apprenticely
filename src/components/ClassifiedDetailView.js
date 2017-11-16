@@ -26,7 +26,6 @@ class ClassifiedDetailView extends Component {
                 return response.json();
             }
         }).then(function (data) {
-            console.log("Fetch in the ClassifiedDetailView component worked.");
             scope.setState({
                 currentAd: data
             });
@@ -39,6 +38,8 @@ class ClassifiedDetailView extends Component {
         //Convert the datePosted string back into a js Date object: 
         const dateAdWasPosted = new Date(this.state.currentAd.datePosted);
         const todaysDate = new Date();
+
+        const imageSrc = "/images/classifiedImageUploads/" + this.state.currentAd.image0;
 
         //Calculate the time elapsed since the ad was posted:
         function calculateTimeElapsed(dateAdWasPosted, todaysDate) {
@@ -71,7 +72,7 @@ class ClassifiedDetailView extends Component {
         return (
             <div className="col-sm-8 offset-sm-2" >
                 <div className="card text-center">
-                    <img className="card-img-top" src="http://via.placeholder.com/700x300" alt="Image caption" />
+                    <img className="card-img-top" src={imageSrc} alt="Image caption" />
                     <div className="card-block">
                         <h4 className="card-title">{this.state.currentAd.title}</h4>
                         <p className="card-text">{this.state.currentAd.description}</p>

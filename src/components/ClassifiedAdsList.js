@@ -24,7 +24,6 @@ class ClassifiedAdsList extends Component {
                 return response.json();
             }
         }).then(function (data) {
-            console.log("Fetch in the ClassifiedAdsList component worked.");
             scope.setState({
                 listOfAds: data
             });
