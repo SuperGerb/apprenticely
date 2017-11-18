@@ -1,7 +1,10 @@
 var MongoClient = require('mongodb').MongoClient;
 var test = require('assert'); //For unit testing...
-var dbName = "apprenticely";
-var url = "mongodb://localhost:27017/" + dbName;
+require('dotenv').config();
+
+var dbName = process.env.MONGO_DBNAME; //"apprenticely";
+//var url = "mongodb://localhost:27017/" + dbName;
+var url = "mongodb://" + process.env.MONGO_HOST + ":" + process.env.MONGO_PORT + "/" + dbName;
 var fs = require("fs"); //Node's file system module
 var dbConnection = null;
 

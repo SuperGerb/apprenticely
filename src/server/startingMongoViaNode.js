@@ -10,14 +10,15 @@
 
 console.log('Starting MongoDB.');
 
+//load config
+require('dotenv').config();
+let mongoPath = process.env.MONGO_PATH;
+let mongoDataDir = process.env.MONGO_DATADIR;
+
 //stdout not showing up with .exec, so using .spawn instead, which uses streams and event emitters
 const spawn = require('child_process').spawn;
 
-//Specify the dbPath for mongod to use as a data directory:
-//spawn's arguments: mongosExecutableFile', and the command to run, as an array: --dbpath /data/db
-//On Mac:
-var mongod = spawn('/usr/local/Cellar/mongodb/3.4.9/bin/mongod', ['--dbpath', '/data/db']);
-//On Windows: //var mongod = spawn('C:/Program Files/MongoDB/Server/3.4/bin/mongod.exe', ['--dbpath', 'C:/_data/db']);
+var mongod = spawn(mongoPath, ['--dbpath', mongoDataDir]);
 
 mongod.stdout.on('data', function(data) {
   console.log('mongod | stdout : ' + data.toString());
