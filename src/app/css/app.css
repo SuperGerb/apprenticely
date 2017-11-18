@@ -5996,32 +5996,58 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 .card {
   margin-bottom: 2em; }
 
+.card-title {
+  color: #5bc0de;
+  text-decoration: underline; }
+
+a .card-text {
+  color: #292b2c; }
+  a .card-text:hover {
+    color: #292b2c; }
+
+.card-text:last-child {
+  margin-bottom: 1rem; }
+
+.card-img-top__image-wrap {
+  max-height: 300px;
+  overflow: hidden; }
+
+.classified-ads-image-gallery {
+  max-height: 430px;
+  overflow: hidden; }
+
+.main-image-zone {
+  padding-right: 0.2em; }
+
+.side-image-zone {
+  padding-left: 0.2em; }
+
+.side-image-item {
+  padding-bottom: 0.4em; }
+
 select {
   height: 36px;
   width: 100%; }
 
-.custom-file {
-  margin-bottom: 2rem; }
+.droppable {
+  background: #f8f8f8;
+  background: #5cb85c;
+  color: white;
+  padding: 3em 0;
+  text-align: center;
+  width: 100%; }
 
-.custom-file-control {
-  width: 15.5rem; }
+.droppable.dragover {
+  background: #ffd500; }
 
-.custom-file-input {
-  min-width: 15rem;
-  height: 2.5rem;
-  opacity: 1;
-  padding-top: 6px;
-  margin-left: 9.1rem;
-  max-width: 18rem; }
+.droppable.contains-file {
+  background: #5bc0de; }
 
-.custom-file-control:before {
-  content: "Browse"; }
+.droppable.dragover.contains-file {
+  background: #ffd500; }
 
-.custom-file-control:after {
-  content: "Choose file..."; }
-
-.custom-file-label {
-  display: block; }
+.droppable p {
+  margin-bottom: 0; }
 
 /* NAVIGATION*/
 .navbar {
@@ -6045,6 +6071,6 @@ a:focus {
 h2 {
   margin-bottom: 1.5rem; }
 
-h4.card-title {
-  color: #5bc0de;
-  text-decoration: underline; }
+img {
+  width: 100%;
+  height: auto; }

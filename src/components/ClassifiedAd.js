@@ -4,8 +4,14 @@ import { Link } from 'react-router-dom';
 const ClassifiedAd = (props) => {
     const { adDetails } = props;
     //Equivalent to const adDetails = props.adDetails;
-    const { classifiedId, title, description, location, category, type, image, userId, status, datePosted } = adDetails;
+    const { classifiedId, title, description, location, category, type, images, userId, status, datePosted } = adDetails;
     const detailViewUrl = "/classfiedDetailView?adId=" + classifiedId;
+    let imageSrc = "";
+    //Get the filename of the first image, in order to display it: 
+    if (images) {
+        imageSrc = "/images/classifiedImageUploads/" + images[0].imgFilename;
+    }
+
     //Convert the datePosted string from the database back into a js Date object: 
     const dateAdWasPosted = new Date(datePosted);
     const todaysDate = new Date();
@@ -24,14 +30,14 @@ const ClassifiedAd = (props) => {
             let differenceInHours = Math.round(difference_ms / oneHour);
             if (differenceInHours < 1) {
                 return "Less than 1 hour ago";
-            } else if(differenceInHours === 1){
+            } else if (differenceInHours === 1) {
                 return differenceInHours + " hour ago";
-            }else{
+            } else {
                 return differenceInHours + " hours ago";
             }
-        } else if(differenceInDays === 1){
+        } else if (differenceInDays === 1) {
             return differenceInDays + " day ago";
-        }else{
+        } else {
             return differenceInDays + " days ago";
         }
     }
@@ -60,13 +66,17 @@ const ClassifiedAd = (props) => {
 
     return (
         <div className="card text-center" >
-            <img className="card-img-top" src="http://via.placeholder.com/350x150" alt="Image caption" />
+            <Link to={detailViewUrl}>
+                <div className="card-img-top__image-wrap">
+                    <img className="card-img-top" src={imageSrc} alt="Image caption" />
+                </div>
+            </Link>
             <div className="card-block">
-                <h4 className="card-title">{title}</h4>
-                <p className="card-text">{shortDesc}</p>
+                <Link to={detailViewUrl}><h4 className="card-title">{title}</h4></Link>
+                <Link to={detailViewUrl}><p className="card-text">{shortDesc}</p></Link>
                 <Link to={detailViewUrl} className="btn btn-primary">More info</Link>
             </div>
-            <div className="card-footer text-muted">{timeElapsedSincePosted}</div>
+            <Link to={detailViewUrl}><div className="card-footer text-muted">{timeElapsedSincePosted}</div></Link>
         </div >
     )
 }

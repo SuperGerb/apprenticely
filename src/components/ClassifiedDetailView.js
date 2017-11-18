@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+//import Lightbox from 'react-images';
+import ImageGallery from './ImageGallery';
 
 class ClassifiedDetailView extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -26,7 +27,6 @@ class ClassifiedDetailView extends Component {
                 return response.json();
             }
         }).then(function (data) {
-            console.log("Fetch in the ClassifiedDetailView component worked.");
             scope.setState({
                 currentAd: data
             });
@@ -36,8 +36,12 @@ class ClassifiedDetailView extends Component {
     }
 
     render() {
+        const { currentAd } = this.state;
+        //Equivalent to const currentAd = this.state.currentAd;
+        const { title, description, datePosted, location, category, type, images } = currentAd;
+
         //Convert the datePosted string back into a js Date object: 
-        const dateAdWasPosted = new Date(this.state.currentAd.datePosted);
+        const dateAdWasPosted = new Date(datePosted);
         const todaysDate = new Date();
 
         //Calculate the time elapsed since the ad was posted:
@@ -54,31 +58,60 @@ class ClassifiedDetailView extends Component {
                 let differenceInHours = Math.round(difference_ms / oneHour);
                 if (differenceInHours < 1) {
                     return "Less than 1 hour ago";
-                } else if(differenceInHours === 1){
+                } else if (differenceInHours === 1) {
                     return differenceInHours + " hour ago";
-                }else{
+                } else {
                     return differenceInHours + " hours ago";
                 }
-            } else if(differenceInDays === 1){
+            } else if (differenceInDays === 1) {
                 return differenceInDays + " day ago";
-            }else{
+            } else {
                 return differenceInDays + " days ago";
             }
         }
 
         let timeElapsedSincePosted = calculateTimeElapsed(dateAdWasPosted, todaysDate);
 
+        //Format the images: 
+        const baseImageUrl = "/images/classifiedImageUploads/";
+        let imageArray;
+        let firstImageSrc;
+        if (images) {
+            firstImageSrc = baseImageUrl + images[0].imgFilename;
+            imageArray = images.map(function (obj, index) {
+                let imgSrc = baseImageUrl + obj.imgFilename;
+                if (index !== 0) {
+                    return (
+                        <div className="col-sm-12 side-image-item" key={index}>
+                            <img className="card-img-side" src={imgSrc} alt="Image caption" />
+                        </div>
+                    )
+                }
+                //Or, if using the react-images (ImageGallery) module, return an array of objects with src keys, ex: [{src: imageSrc}, {src: imageSrc1}, {src: imageSrc2}]
+            });
+        }
+
         return (
             <div className="col-sm-8 offset-sm-2" >
                 <div className="card text-center">
-                    <img className="card-img-top" src="http://via.placeholder.com/700x300" alt="Image caption" />
+                    {/* Implemenent if using react-images module. Needs debugging. <ImageGallery images = {imageArray} showThumbnails = {true} /> */}
+                    <div className="row classified-ads-image-gallery">
+                        <div className="col-sm-9 main-image-zone">
+                            <img src={firstImageSrc} alt="Image caption" />
+                        </div>
+                        <div className="col-sm-3 side-image-zone">
+                            <div className="row">
+                                {imageArray}
+                            </div>
+                        </div>
+                    </div>
                     <div className="card-block">
-                        <h4 className="card-title">{this.state.currentAd.title}</h4>
-                        <p className="card-text">{this.state.currentAd.description}</p>
+                        <h4 className="card-title">{title}</h4>
+                        <p className="card-text">{description}</p>
                         <Link to="/respondToAd" className="btn btn-primary">Respond to this ad</Link>
                     </div>
                     <div className="card-footer text-muted">{timeElapsedSincePosted}</div>
-                </div>
+                </div >
             </div >
         )
     }

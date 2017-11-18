@@ -3,29 +3,28 @@ select{
     width: 100%;
 }
 
- 
-//Custom file input:
-//Used in ClassifiedAdForm. Make sure to check cross-browser compatibility 
-.custom-file{
-    margin-bottom: 2rem;
+//Drag and drop area:
+.droppable { 
+    background: rgb(248, 248, 248);
+    background: $green;
+    color: white;
+    padding: 3em 0; 
+    text-align: center; 
+    width: 100%;
 }
-.custom-file-control{
-    width: 15.5rem;
+
+.droppable.dragover { 
+    background: $yellow;
 }
-.custom-file-input {
-    min-width: 15rem;
-    height: 2.5rem;
-    opacity: 1;
-    padding-top: 6px;
-    margin-left: 9.1rem;
-    max-width: 18rem;
+
+.droppable.contains-file{
+    background: $teal;
 }
-.custom-file-control:before {
-    content: "Browse";
+
+.droppable.dragover.contains-file{
+    background: $yellow;
 }
-.custom-file-control:after {
-    content: "Choose file...";
-}
-.custom-file-label{
-    display: block;
+
+.droppable p{
+    margin-bottom: 0;
 }

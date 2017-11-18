@@ -54,9 +54,8 @@ var connectionObj = {
         });
     },
     insert: function(db, req, callback){
-        var collection = db.collection("adverts"); 
+        var collection = db.collection("adverts");  
         collection.insert(req);
-        console.log("Req as seen by server is " + req);
         callback("Success!");
     },
     update: function(db, req, callback){
