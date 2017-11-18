@@ -123,10 +123,18 @@ app.post('/adCreatedConfirmation', uploadsFolder.array('images', maxImageUploads
 
     if (req.files !== undefined) {
         let images = req.files;
+        let imageArray = [];
         let numberOfImages = images.length;
+
         for(let i = 0; i < numberOfImages; i++){
-            dataToSave["image" + i] = images[i].filename;
+            let imgName = "image" + i;
+            let imgFilename = images[i].filename;
+            let imageObj = {imgName, imgFilename};
+            imageArray.push(imageObj);
+            //dataToSave["image" + i], images[i].filename;
         }
+
+        dataToSave["images"] = imageArray;
     }
 
     connection.conn(function (dbConnection) {

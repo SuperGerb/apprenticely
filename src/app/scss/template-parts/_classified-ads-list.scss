@@ -2,6 +2,30 @@
 .classified-list{
     list-style: none;
 }
+
 .card{
     margin-bottom: 2em;
+}
+
+.card-title{
+    color: $brand-primary;
+    text-decoration: underline; 
+}
+
+a .card-text{
+    color: $body-color;
+    &:hover{
+        color: $body-color;
+    }
+}
+
+.card-text{
+    &:last-child{
+        margin-bottom: 1rem;
+    }
+}
+
+.card-img-top__image-wrap{
+    max-height: 300px;
+    overflow: hidden;
 }
