@@ -1,1 +1,23 @@
 
+.appr-bgimage {
+  width:100%;
+  height:500px;
+  background: url('/images/site/apprcover.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
+  background-attachment: fixed;
+}
+.appr-bgimage h5 {
+  color:white;
+  text-shadow:2px 2px #333;
+}
+
+.row.appr-hero {
+  background-color: rgba(0,0,0,0.44);
+  border-radius: 50px;
+}
+
+h3.appr-hero-caption {
+  color: white;
+}

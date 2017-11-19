@@ -9,7 +9,7 @@ const ClassifiedAd = (props) => {
     let imageSrc = "";
     //Get the filename of the first image, in order to display it: 
     if (images) {
-        imageSrc = "/images/classifiedImageUploads/" + images[0].imgFilename;
+        imageSrc = (images.length>0) ? "/images/classifiedImageUploads/" + images[0].imgFilename : "data:image/gif;base64,R0lGODlhAQABAIAAAP7//wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==";
     }
 
     //Convert the datePosted string from the database back into a js Date object: 

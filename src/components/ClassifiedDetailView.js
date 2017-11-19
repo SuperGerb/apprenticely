@@ -77,6 +77,10 @@ class ClassifiedDetailView extends Component {
         let imageArray;
         let firstImageSrc;
         if (images) {
+          if(images.length == 0){
+            imageArray = [];
+            return;
+          }
             firstImageSrc = baseImageUrl + images[0].imgFilename;
             imageArray = images.map(function (obj, index) {
                 let imgSrc = baseImageUrl + obj.imgFilename;

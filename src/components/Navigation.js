@@ -6,7 +6,7 @@ const Navigation = (props) => (
 	  <button className="navbar-toggler navbar-toggler-right hidden-print" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span className="navbar-toggler-icon"></span>
 	  </button>
-	  <a className="navbar-brand" href="/"><img src="images/logo.png" alt="Apprenticely logo" /></a><h1 className="sr-only">Logo</h1>
+	  <a className="navbar-brand" href="/"><img src="/images/site/apprlogo.png" alt="Apprenticely logo" /></a><h1 className="sr-only">Logo</h1>
 	  <div className="collapse navbar-collapse hidden-print" id="navbarSupportedContent">
 	    <ul className="navbar-nav mr-auto">
 	      <li className="nav-item">

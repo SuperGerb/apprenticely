@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ClassifiedAd from './ClassifiedAd';
+// import ClassifiedAd from './ClassifiedAd';
+import ClassifiedAdMicro from './ClassifiedAdMicro';
 import { Link } from 'react-router-dom';
 import ClassifiedDetailView from './ClassifiedDetailView';
 
@@ -36,13 +37,13 @@ class ClassifiedAdsList extends Component {
         const ads = this.state.listOfAds.map(function(value,index){
             return(
                 <li key={index} className="col-xs-6 col-sm-4">
-                    <ClassifiedAd adDetails = {value} />
+                    <ClassifiedAdMicro adDetails = {value} />
                 </li>
             )
         });
 
         return(
-            <ul className="row classified-list">
+            <ul className="row classified-list appr-microlist">
                {ads}
             </ul>
         )

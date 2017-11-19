@@ -13,4 +13,22 @@ img{
     width: 100%;
     height: auto;
 }
+.container-fluid {
+  padding: 0px;
+}
+@media (min-width: 1px) {/*override all bootstrap media queries for this class*/
+  .container-fluid { padding: 0px; }
+}
 
+a.navbar-brand img {
+  max-width: 300px;
+}
+/* @media (min-width: 576px) {
+  a.navbar-brand img {
+    max-width: 300px;
+  }
+} */
+
+section.appr-main {
+  background-color: #292b2c;
+}

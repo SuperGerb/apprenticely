@@ -1,0 +1,53 @@
+.appr-microlist, .appr-microlist-flexer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.appr-microlist-flexer .card-block {
+  height: 8em;
+  overflow: hidden;
+}
+
+.appr-microlist li .card {
+  height:150px;
+  overflow:hidden;
+}
+
+.appr-microlist-thumbnail {
+  width:150px;
+  height:150px;
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .appr-microlist li.col-sm-4 {
+      flex: 0 0 100%;
+      max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .appr-microlist .col-sm-4 {
+      flex: 0 0 50%;
+      max-width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* swap to vertical cards */
+  .appr-microlist-thumbnail {
+    width:auto;
+  }
+  .appr-microlist li .card {
+    width: auto;
+    height: auto;
+    overflow: visible;
+  }
+  .appr-microlist-flexer {
+    flex-direction: column;
+  }
+  .appr-microlist .col-sm-4 {
+      flex: 0 0 25%;
+      max-width: 25%;
+  }
+}

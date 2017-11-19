@@ -5991,7 +5991,8 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 
 /*CLASSIFIED ADS LIST*/
 .classified-list {
-  list-style: none; }
+  list-style: none;
+  padding: 0px; }
 
 .card {
   margin-bottom: 2em; }
@@ -6050,15 +6051,8 @@ select {
   margin-bottom: 0; }
 
 /* NAVIGATION*/
-.navbar {
-  margin-bottom: 2em; }
-
 .nav li a {
   cursor: pointer; }
-
-/*CLASSIFIED ADS LIST*/
-.classified-list {
-  list-style: none; }
 
 /*BASE STYLES*/
 img {
@@ -6074,3 +6068,83 @@ h2 {
 img {
   width: 100%;
   height: auto; }
+
+.container-fluid {
+  padding: 0px; }
+
+@media (min-width: 1px) {
+  /*override all bootstrap media queries for this class*/
+  .container-fluid {
+    padding: 0px; } }
+
+a.navbar-brand img {
+  max-width: 300px; }
+
+/* @media (min-width: 576px) {
+  a.navbar-brand img {
+    max-width: 300px;
+  }
+} */
+section.appr-main {
+  background-color: #292b2c; }
+
+.appr-bgimage {
+  width: 100%;
+  height: 500px;
+  background: url("/images/site/apprcover.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed; }
+
+.appr-bgimage h5 {
+  color: white;
+  text-shadow: 2px 2px #333; }
+
+.row.appr-hero {
+  background-color: rgba(0, 0, 0, 0.44);
+  border-radius: 50px; }
+
+h3.appr-hero-caption {
+  color: white; }
+
+.appr-microlist, .appr-microlist-flexer {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch; }
+
+.appr-microlist-flexer .card-block {
+  height: 8em;
+  overflow: hidden; }
+
+.appr-microlist li .card {
+  height: 150px;
+  overflow: hidden; }
+
+.appr-microlist-thumbnail {
+  width: 150px;
+  height: 150px; }
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .appr-microlist li.col-sm-4 {
+    flex: 0 0 100%;
+    max-width: 100%; } }
+
+@media (min-width: 768px) {
+  .appr-microlist .col-sm-4 {
+    flex: 0 0 50%;
+    max-width: 50%; } }
+
+@media (min-width: 1024px) {
+  /* swap to vertical cards */
+  .appr-microlist-thumbnail {
+    width: auto; }
+  .appr-microlist li .card {
+    width: auto;
+    height: auto;
+    overflow: visible; }
+  .appr-microlist-flexer {
+    flex-direction: column; }
+  .appr-microlist .col-sm-4 {
+    flex: 0 0 25%;
+    max-width: 25%; } }

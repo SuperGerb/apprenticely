@@ -7,15 +7,26 @@ var multer = require('multer');
 var connection = require('../dao/connection.js');
 const path = require('path');
 const uuidv4 = require('uuid/v4');
+const JSServerUtils = require('../utils/js-server-utils.js');
+
+//load env
+require('dotenv').config();
+const PORT = process.env.PORT || 3000;
+
 //Create an instance of Express: 
 var app = express();
 
 var absPathToPublicFolder = path.join(__dirname, '..', '..', 'public');
 
+//ensure images folder exists before trying to write to it:
+const absPathToClassifAdImgs = process.env.CLASSIFADS_IMAGEDIR;
+JSServerUtils.ensureFolderExists(absPathToClassifAdImgs);
+
 //Specify file uploads folder:
 const storageForImageFiles = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'src/server/classifiedImageUploads/')
+        // cb(null, 'src/server/classifiedImageUploads/')
+        cb(null, absPathToClassifAdImgs)
     },
     //Give the each file a unique name, and conserve its file type extension:
     filename: function (req, file, cb) {
@@ -163,5 +174,6 @@ app.get('/*', function (req, res) {
 
 
 //Lastly, listen for incoming http requests: 
-app.listen(8080);
+app.listen(PORT);
+console.log("========== Server is UP : Listening on port", PORT, "===========");
 
