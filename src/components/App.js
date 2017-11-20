@@ -19,23 +19,13 @@ import isAuthed from './user/auth/PrfAuthCheck';
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isLoggedIn: false
-    };
     this.prfClient = new PrfHttpClient();
-  }
-
-  setLogin = (loginFlag) => {
-    if (loginFlag == false) {
-      this.prfClient.logout();
-    }
-    this.setState({ isLoggedIn: loginFlag });
   }
 
   render() {
     return (
       <div>
-        <Navigation isLoggedIn={this.state.isLoggedIn} notifyLoginStatus={this.setLogin} />
+        <Navigation />
         <div className="container-fluid">
           <Switch>
             <Route exact path='/' component={Landing} />

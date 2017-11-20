@@ -57,11 +57,6 @@ export default class PrfProfilePage extends Component {
     this.prfClient.getProfilesByUsernameList( [this.props.match.params.username, decodedUser.username], this.onProfilesFetched);
   }
 
-  doLogout = () => {
-    this.prfClient.logout();
-    this.setState({loggedOut:true});
-  }
-
   notifyOnFollow = ()=> {
     console.log("PrfProfilePage::notifyOnFollow");
     this.prfClient.addFollowFrom(this.state.profileViewer, this.state.profileOwner, this.onFollowed);
@@ -114,10 +109,6 @@ export default class PrfProfilePage extends Component {
     console.log(3);
     return(
       <div className="container-fluid">
-        <div className='btn-toolbar'>
-          <button onClick={this.doLogout} type='button' className='btn btn-primary'>Logout</button>
-        </div>
-
         {/* display only once the profile info is ready */}
         {(this.state.profileOwner)?
           <PrfProfileDetail user={this.state.profileOwner} viewer={this.state.profileViewer} ownerIsViewer={this.state.ownerIsViewer}

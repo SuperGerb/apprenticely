@@ -33,3 +33,13 @@
 .appr-hero-copy {
   color: rgb(236, 236, 236);
 }
+
+.badge.appr-nav-username{
+  padding: 0.5em;
+  font-size: 1em;
+  font-weight: normal;
+  background-color: darken($appr-pink,5);
+}
+a.badge.appr-nav-username:hover {
+  background-color: $appr-pink
+}

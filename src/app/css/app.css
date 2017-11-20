@@ -6138,6 +6138,15 @@ a.btn.accented:focus {
 .appr-hero-copy {
   color: #ececec; }
 
+.badge.appr-nav-username {
+  padding: 0.5em;
+  font-size: 1em;
+  font-weight: normal;
+  background-color: #ff1461; }
+
+a.badge.appr-nav-username:hover {
+  background-color: #ff2d72; }
+
 .appr-microlist, .appr-microlist-flexer {
   display: flex;
   flex-direction: row;
