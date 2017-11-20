@@ -1,23 +1,35 @@
 
 .appr-bgimage {
   width:100%;
-  height:500px;
+  min-height:600px;
   background: url('/images/site/apprcover.jpg');
   background-repeat: no-repeat;
   background-position: center;
   background-size:cover;
   background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.appr-bgimage h5 {
-  color:white;
-  text-shadow:2px 2px #333;
+.appr-bgimage.short {
+  min-height:300px;
 }
-
 .row.appr-hero {
-  background-color: rgba(0,0,0,0.44);
-  border-radius: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
-
-h3.appr-hero-caption {
-  color: white;
+.appr-hero-box {
+  padding: 20px;
+  background-color: rgba(46, 66, 85, 0.45);
+  border-radius: 5px;
+}
+.appr-hero-caption {
+  color: #ffffff;
+}
+.appr-hero-copy {
+  color: rgb(236, 236, 236);
 }

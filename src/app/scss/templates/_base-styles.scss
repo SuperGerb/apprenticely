@@ -1,17 +1,12 @@
 /*BASE STYLES*/
-img{
-	max-width: 100%;
-}
-a:hover,
-a:focus{
-	text-decoration: none;
-}
-h2{
-    margin-bottom: 1.5rem;
-}
-img{
-    width: 100%;
-    height: auto;
+$appr-black: #292b2c;
+$appr-pink: #ff2d72;
+$appr-lightpink: #ffb8d0;
+$appr-teal: #5bc0de;
+
+/* layout */
+body {
+  background-color: $appr-black;
 }
 .container-fluid {
   padding: 0px;
@@ -19,16 +14,46 @@ img{
 @media (min-width: 1px) {/*override all bootstrap media queries for this class*/
   .container-fluid { padding: 0px; }
 }
-
-a.navbar-brand img {
-  max-width: 300px;
-}
-/* @media (min-width: 576px) {
-  a.navbar-brand img {
-    max-width: 300px;
-  }
-} */
-
 section.appr-main {
-  background-color: #292b2c;
+  background-color: $appr-black;
+  padding: 2em;
+}
+
+/* text and captions */
+h2{
+  margin-bottom: 1.5rem;
+}
+
+/* links */
+a:hover,
+a:focus{
+	text-decoration: none;
+}
+
+/* images */
+img{
+    width: 100%;
+    height: auto;
+}
+a.navbar-brand img {
+  max-width: 275px;
+}
+
+/* buttons */
+.btn {
+  margin: 0 1em 0 0;
+}
+.btn.accented {
+  background-color: $appr-pink;
+  border-color: darken($appr-pink, 10);
+}
+
+a.btn.accented:focus {
+  color: $appr-lightpink;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: $appr-teal;
+  border-color: $appr-teal;
 }

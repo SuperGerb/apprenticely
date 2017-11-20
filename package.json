@@ -1,9 +1,17 @@
 {
-  "name": "apprenticely-package",
+  "name": "apprenticely",
   "version": "1.0.0",
-  "description": "A great package.",
-  "main": "index.js",
-  "author": "Stephanie Carter",
+  "description": "A joint learning project to build a platform for creative communities",
+  "main": "src/server/server.js",
+  "contributors": [
+    {
+      "name": "lululeon",
+      "email": "thelululeon@gmail.com"
+    },
+    {
+      "name": "Stephanie Carter"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "aphrodite": "^1.2.5",
@@ -17,6 +25,8 @@
     "mongodb": "^2.2.31",
     "multer": "^1.3.0",
     "path": "^0.12.7",
+    "profilic-client": "^0.0.2",
+    "profilic-server": "^0.0.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-images": "^0.5.11",
@@ -28,16 +38,18 @@
     "startdb": "node src/server/startingMongoViaNode.js",
     "sasstask": "node-sass --watch src/app/scss/app.scss -o src/app/css",
     "buildtask": "webpack --watch",
-    "start": "concurrently -n \"DB,SASS,WEBPK,APP\" \"yarn startdb\" \"yarn sasstask\" \"yarn buildtask\" \"nodemon src/server/server.js -e js,html\" "
+    "startdev": "concurrently -n \"DB,SASS,WEBPK,APP\" \"yarn startdb\" \"yarn sasstask\" \"yarn buildtask\" \"nodemon src/server/server.js -e js,html\" ",
+    "start": "node src/server/server.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.5.3",
-    "webpack": "^3.6.0"    
+    "webpack": "^3.6.0"
   }
 }

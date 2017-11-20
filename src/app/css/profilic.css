@@ -1,0 +1,64 @@
+/* css styling for profilic user profiles */
+
+/* bootstrap tweaks / fixers */
+.btn-toolbar .btn{
+  margin-right: 5px;
+}
+.btn-toolbar .btn:last-child{
+  margin-right: 0;
+}
+
+/* flexbox container for media widgets */
+.prf-mediabox {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* vertical cards */
+.card.prf-vcard {
+  max-width: 15rem;
+  margin:1em;
+}
+.prf-vcard .card-body {
+  padding: 1em;
+  flex-grow: 3;
+}
+
+
+/* horizontal cards */
+.card.prf-hcard {
+  background-color: #f6fafb;
+  margin: 1em;
+}
+
+img.card-img-left.prf-avatar {
+  width: 10rem;
+  height: 10rem;
+}
+
+/* auth forms */
+.card.prf-authbox {
+  background-color: #ebf2f5;
+  padding: 1em;
+}
+
+/* media items */
+.card.prf-mediabox-item {
+  width: 33.3%;
+}
+
+.prf-imgloader img, .prf-imgcontent img {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .card-group .card.prf-infobox{
+      max-width: 100%;
+  }
+}
+
+@media (max-width: 800px) {
+  .card.prf-mediabox-item {
+      width: 100%;
+  }
+}

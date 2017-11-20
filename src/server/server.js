@@ -8,6 +8,7 @@ var connection = require('../dao/connection.js');
 const path = require('path');
 const uuidv4 = require('uuid/v4');
 const JSServerUtils = require('../utils/js-server-utils.js');
+const profilicServer = require('profilic-server'); 
 
 //load env
 require('dotenv').config();
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 3000;
 
 //Create an instance of Express: 
 var app = express();
+profilicServer.configureExpressApp(app, true);
 
 var absPathToPublicFolder = path.join(__dirname, '..', '..', 'public');
 
@@ -38,22 +40,34 @@ const storageForImageFiles = multer.diskStorage({
 const uploadsFolder = multer({ storage: storageForImageFiles });
 
 //Specify the maximum number of images a user can upload when creating a classified ad:
-const maxImageUploads = 100;
+const maxImageUploads = 5;
 
 //Express is now my web server, not Node, so no need to createServer here at all.
 
 //Configuring Express to use body-parser as middle-ware in order to parse the body of http requests, and therefore be able to fulfill basic POST requests. (For multipart form data, Multer is used.):
 //Support parsing of application/json type post data:
-app.use(bodyParser.json());
-//Support parsing of application/x-www-form-urlencoded post data: 
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// //Support parsing of application/x-www-form-urlencoded post data: 
+// app.use(bodyParser.urlencoded({ extended: true }));
 
-//To serve a static page (index.html):
+// //To serve a static page (index.html):
 app.use(express.static(absPathToPublicFolder));
 
 app.get('/', function (req, res) {
     res.sendFile(path.join(absPathToPublicFolder, "index.html"));
 });
+
+// app.use(express.static(path.resolve('public'))); //'public' folder will be html web root
+// app.get('*', function(req, res){
+//   //this catch-all is here to support react router
+//   res.sendFile(path.resolve(path.join('public','index.html')));
+// });
+app.use(function(err,req,res,next){
+  //this is the generic, catch-all error handler
+  res.status(500).render('error', { message: 'An Internal Server Error occured.' });
+});
+
+
 
 //Configure server:
 // GET method route
