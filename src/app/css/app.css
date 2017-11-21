@@ -6057,7 +6057,8 @@ select {
 /*BASE STYLES*/
 /* layout */
 body {
-  background-color: #292b2c; }
+  background-color: #292b2c;
+  color: #989898; }
 
 .container-fluid {
   padding: 0px; }
@@ -6142,7 +6143,8 @@ a.btn.accented:focus {
   padding: 0.5em;
   font-size: 1em;
   font-weight: normal;
-  background-color: #ff1461; }
+  background-color: #ff1461;
+  max-width: 275px; }
 
 a.badge.appr-nav-username:hover {
   background-color: #ff2d72; }

@@ -16,6 +16,7 @@ export default class PrfBaseAuthForm extends Component {
     };
     this.prfClient = new PrfHttpClient();
     this.defaultNoAuthPath = process.env.PRF_DEFAULT_NOAUTH_PATH || "/";
+    this.lastSignupAttempt = null;
   }
 
   resetForm=()=>{
@@ -69,6 +70,7 @@ export default class PrfBaseAuthForm extends Component {
 
     //checks ok
     let newUser = {username:username, password:password, email:email};
+    this.lastSignupAttempt = newUser;
     console.log('PrfBaseAuthForm::doSignup - sending signup info...');
     this.prfClient.signupNewProfile(newUser, this.onSignupComplete);
   }
@@ -85,6 +87,8 @@ export default class PrfBaseAuthForm extends Component {
           console.error("PrfBaseAuthForm::onSignupComplete : signup request failed");
         }
     }
+    //log them in:
+    this.prfClient.login(this.lastSignupAttempt , this.onLoginComplete);
   }
  
   doLogin =(e)=> {

@@ -101,12 +101,9 @@ export default class PrfProfilePage extends Component {
   }
 
   render=()=>{
-    console.log(1);
     if(this.state.loggedOut) {
-      console.log(2);
       return( <Redirect to={this.defaultLogoutPath} from={this.props.match.url} push /> );
     }
-    console.log(3);
     return(
       <div className="container-fluid">
         {/* display only once the profile info is ready */}

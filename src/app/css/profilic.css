@@ -23,6 +23,9 @@
   padding: 1em;
   flex-grow: 3;
 }
+.card.prf-vcard.prf-infobox {
+  margin: 0;
+}
 
 
 /* horizontal cards */

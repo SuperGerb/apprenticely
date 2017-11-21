@@ -39,6 +39,7 @@
   font-size: 1em;
   font-weight: normal;
   background-color: darken($appr-pink,5);
+  max-width: 275px;
 }
 a.badge.appr-nav-username:hover {
   background-color: $appr-pink
