@@ -22,14 +22,16 @@
     "dotenv": "^4.0.0",
     "express": "^4.16.1",
     "jquery": "^3.2.1",
+    "jwt-decode": "^2.2.0",
     "mongodb": "^2.2.31",
     "multer": "^1.3.0",
     "path": "^0.12.7",
     "profilic-client": "^0.0.2",
-    "profilic-server": "^0.0.1",
+    "profilic-server": "^0.0.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-images": "^0.5.11",
+    "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "tether": "^1.4.0",
     "uuid": "^3.1.0"
@@ -38,7 +40,7 @@
     "startdb": "node src/server/startingMongoViaNode.js",
     "sasstask": "node-sass --watch src/app/scss/app.scss -o src/app/css",
     "buildtask": "webpack --watch",
-    "startdev": "concurrently -n \"DB,SASS,WEBPK,APP\" \"yarn startdb\" \"yarn sasstask\" \"yarn buildtask\" \"nodemon src/server/server.js -e js,html\" ",
+    "startdev": "concurrently -n \"SASS,WEBPK,APP\" \"yarn sasstask\" \"yarn buildtask\" \"nodemon src/server/server.js -e js,html\" ",
     "start": "node src/server/server.js"
   },
   "devDependencies": {

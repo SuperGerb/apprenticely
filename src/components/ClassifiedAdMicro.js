@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { calculateTimeElapsed, truncateCopy } from "../app/utilities/ad-formatting.js";
 import JSClientUtils from '../utils/js-client-utils.js';
 
 const ClassifiedAdMicro = (props) => {
@@ -15,10 +16,10 @@ const ClassifiedAdMicro = (props) => {
     //Convert the datePosted string from the database back into a js Date object: 
     const dateAdWasPosted = new Date(datePosted);
     const todaysDate = new Date();
-    let timeElapsedSincePosted = JSClientUtils.calculateTimeElapsed(dateAdWasPosted, todaysDate);
+    let timeElapsedSincePosted = calculateTimeElapsed(dateAdWasPosted, todaysDate);
 
     //Truncate the description ensuring to not place ellipsis in the middle of a word or after a punctuation symbol:
-    let shortDesc = JSClientUtils.truncateCopy(description, 70);
+    let shortDesc = truncateCopy(description, 70);
 
     return (
       <div className="card" >
@@ -33,14 +34,6 @@ const ClassifiedAdMicro = (props) => {
         </div>
       </div >
     );
-
-    // return (
-    //   <div className="card appr-microlist-cell">
-    //       <div style={ {background: `url(${imageSrc}) no-repeat center`, width: '50px', height: '50px'} }>&nbsp;</div>
-    //       <Link to={detailViewUrl}><h4 className="card-title">{title}</h4></Link>
-    //       <Link to={detailViewUrl}><p className="card-text">{shortDesc}</p></Link>
-    //   </div>
-    // );
 }
 
 export default ClassifiedAdMicro;
