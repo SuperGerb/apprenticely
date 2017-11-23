@@ -182,6 +182,10 @@ app.post('/confirmationUpdateScreen', function (req, res) {
     });
 });
 
+app.post('/adInquiryConfirmation', function(req, res){
+    //To do: send email and return success message
+});
+
 app.get('/*', function (req, res) {
     res.sendFile(path.join(absPathToPublicFolder, "index.html"));
 });

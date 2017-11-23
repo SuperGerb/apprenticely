@@ -30,3 +30,19 @@ a .card-text{
     max-height: 300px;
     overflow: hidden;
 }
+
+.card__classified-list-view{
+    h4{
+        font-size: 1em;
+        margin-bottom: 0;
+    }
+    .card-block{
+        padding: 1rem;
+    }
+    .card-footer{
+        font-size: 0.7em;
+        font-style: italic;
+        padding: 0.2em;
+        border-top: 0;
+    }
+}

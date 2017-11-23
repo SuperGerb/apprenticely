@@ -10,7 +10,7 @@ class AdInquiryForm extends Component {
             message: "",
             date: "",
             userId: "",
-            classifiedId: "" //gotten as props from detail view
+            classifiedId: "" //To be received as props from ClassifiedDetailView
         }
     }
 
@@ -35,39 +35,36 @@ class AdInquiryForm extends Component {
             method: 'POST',
             body: scope.state 
         }).then(function(response){
-
+            //Email will have been sent by the server (to do) and a response in the form of a success message should be returned.
         }).then(function(){
             scope.setState({
                 submitted: true
-            });
+            })
         });
     }
 
     render() {
         return(
-            <div className="col-sm-8 offset-sm-2" >
-                 <div className="card">
+            <div className="col-sm-4 offset-sm-4" >
+                 <div className="card ad-inquiry-card">
                      <div className="card-block">
-                         <h2>Respond to the ad:</h2>
+                         <h5>Respond to the ad</h5>
                          <form id="adInquiryForm" name="adInquiryForm">
-                             <label htmlFor="name">Name</label>
+                             <label htmlFor="name" className="sr-only">Name</label>
                              <div className="input-group">
                                  <input type="text" value={this.state.name} className="form-control" id="name" name="name" placeholder="Your name" aria-describedby="basic-addon1" onChange={this.handleChangeInput} />
                              </div>
-                             <br />
-                             <label htmlFor="email">Email</label>
+                             <label htmlFor="email" className="sr-only">Email</label>
                              <div className="input-group">
                                  <input type="email" value={this.state.email} className="form-control" id="email" name="email" placeholder="Your email address" aria-describedby="basic-addon1" onChange={this.handleChangeInput} />
                              </div>
-                             <br />
-                             <label htmlFor="message">Message</label>
+                             <label htmlFor="message" className="sr-only">Message</label>
                              <div className="input-group">
-                                 <textarea value={this.state.message} className="form-control" id="message" name="description" aria-describedby="basic-addon1" onChange={this.handleChangeInput}></textarea>
+                                 <textarea value={this.state.message} className="form-control" id="message" name="description" placeholder="Message" aria-describedby="basic-addon1" onChange={this.handleChangeInput}></textarea>
                              </div>
-                             <br />
                              <input type="hidden" value={this.state.userId} className="form-control" id="userId" name="userId" />
                              <input type="hidden" value={this.state.classifiedId} className="form-control" id="status" name="classifiedId" />
-                             <button type="submit" className="btn btn-primary" id="submitAdInquiry" onClick={this.handleSubmitAdInquiry}>Send message</button>
+                             <button type="submit" className="btn btn-primary" id="submitAdInquiry" onClick={this.handleSubmitAdInquiry}>Send</button>
                          </form>
                      </div>
                  </div >

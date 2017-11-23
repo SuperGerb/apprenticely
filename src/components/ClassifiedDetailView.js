@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import { Link } from 'react-router-dom';
 //import Lightbox from 'react-images';
 import ImageGallery from './ImageGallery';
+import AdInquiryForm from './AdInquiryForm';
 
 class ClassifiedDetailView extends Component {
     constructor(props) {
@@ -37,10 +38,13 @@ class ClassifiedDetailView extends Component {
     }
 
     displayAdInquiryForm = (event) => {
-        event.preventDefault();
-        this.setState({
-            submitted: true
+        this.setState({submitted: true}, ()=> {
+            this.scrollToForm();
         });
+    }
+
+    scrollToForm(){
+        window.scrollTo(0, 2000);
     }
 
     render() {
@@ -104,32 +108,31 @@ class ClassifiedDetailView extends Component {
         }
 
         return (
-
-            <div className="col-sm-8 offset-sm-2" >
-                <div className="card text-center">
-                    {/* Implemenent if using react-images module. Needs debugging. <ImageGallery images = {imageArray} showThumbnails = {true} /> */}
-                    <div className="row classified-ads-image-gallery">
-                        <div className="col-sm-9 main-image-zone">
-                            <img src={firstImageSrc} alt="Image caption" />
-                        </div>
-                        <div className="col-sm-3 side-image-zone">
-                            <div className="row">
-                                {imageArray}
+            <div>
+                <div className="col-sm-8 offset-sm-2 classified-detail-view" >
+                    <div className="card text-center">
+                        {/* Implemenent if using react-images module. Needs debugging. <ImageGallery images = {imageArray} showThumbnails = {true} /> */}
+                        <div className="row classified-ads-image-gallery">
+                            <div className="col-sm-9 main-image-zone">
+                                <img src={firstImageSrc} alt="Image caption" />
+                            </div>
+                            <div className="col-sm-3 side-image-zone">
+                                <div className="row">
+                                    {imageArray}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="card-block">
-                        <h4 className="card-title">{title}</h4>
-                        <p className="card-text">{description}</p>
-                        <button className="btn btn-primary" onClick={this.displayAdInquiryForm}>Respond to this ad</button>
-                    </div>
-                    <div className="card-footer text-muted">{timeElapsedSincePosted}</div>
+                        <div className="card-block">
+                            <h4 className="card-title">{title}</h4>
+                            <p className="card-text">{description}</p>
+                            <button className="btn btn-primary" onClick={this.displayAdInquiryForm}>Respond to this ad</button>
+                        </div>
+                        <div className="card-footer text-muted">{timeElapsedSincePosted}</div>
+                    </div >
                 </div >
-            </div >
+                {this.state.submitted ? <AdInquiryForm /> : null}
+            </div>
         )
-        if (this.state.submitted == true) {
-            return <adInquiryForm />;
-        }
     }
 }
 
