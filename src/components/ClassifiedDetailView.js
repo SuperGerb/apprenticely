@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 //import Lightbox from 'react-images';
 import ImageGallery from './ImageGallery';
 
@@ -7,6 +7,7 @@ class ClassifiedDetailView extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            submitted: false,
             currentAd: {}
         }
     }
@@ -32,6 +33,13 @@ class ClassifiedDetailView extends Component {
             });
         }).catch(function (err) {
             console.log("The following error occured in the Fetch of the ClassifiedDetailView component: ", err);
+        });
+    }
+
+    displayAdInquiryForm = (event) => {
+        event.preventDefault();
+        this.setState({
+            submitted: true
         });
     }
 
@@ -77,10 +85,10 @@ class ClassifiedDetailView extends Component {
         let imageArray;
         let firstImageSrc;
         if (images) {
-          if(images.length == 0){
-            imageArray = [];
-            return;
-          }
+            if (images.length == 0) {
+                imageArray = [];
+                return;
+            }
             firstImageSrc = baseImageUrl + images[0].imgFilename;
             imageArray = images.map(function (obj, index) {
                 let imgSrc = baseImageUrl + obj.imgFilename;
@@ -96,6 +104,7 @@ class ClassifiedDetailView extends Component {
         }
 
         return (
+
             <div className="col-sm-8 offset-sm-2" >
                 <div className="card text-center">
                     {/* Implemenent if using react-images module. Needs debugging. <ImageGallery images = {imageArray} showThumbnails = {true} /> */}
@@ -112,12 +121,15 @@ class ClassifiedDetailView extends Component {
                     <div className="card-block">
                         <h4 className="card-title">{title}</h4>
                         <p className="card-text">{description}</p>
-                        <Link to="/respondToAd" className="btn btn-primary">Respond to this ad</Link>
+                        <button className="btn btn-primary" onClick={this.displayAdInquiryForm}>Respond to this ad</button>
                     </div>
                     <div className="card-footer text-muted">{timeElapsedSincePosted}</div>
                 </div >
             </div >
         )
+        if (this.state.submitted == true) {
+            return <adInquiryForm />;
+        }
     }
 }
 
