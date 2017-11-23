@@ -6013,6 +6013,28 @@ a .card-text {
   max-height: 300px;
   overflow: hidden; }
 
+.card__classified-list-view h4 {
+  font-size: 1em;
+  margin-bottom: 0; }
+
+.card__classified-list-view .card-block {
+  padding: 1rem; }
+
+.card__classified-list-view .card-footer {
+  font-size: 0.7em;
+  font-style: italic;
+  padding: 0.2em;
+  border-top: 0; }
+
+.classified-detail-view {
+  padding-top: 20px; }
+
+.ad-inquiry-card {
+  text-align: center; }
+
+#adInquiryForm .input-group {
+  padding-bottom: 0.5em; }
+
 .classified-ads-image-gallery {
   max-height: 430px;
   overflow: hidden; }
@@ -6057,7 +6079,6 @@ select {
 /*BASE STYLES*/
 /* layout */
 body {
-  background-color: #292b2c;
   color: #989898; }
 
 .container-fluid {

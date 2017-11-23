@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-// import ClassifiedAd from './ClassifiedAd';
-import ClassifiedAdMicro from './ClassifiedAdMicro';
+import ClassifiedAd from './ClassifiedAd';
+//import ClassifiedAdMicro from './ClassifiedAdMicro';
 import { Link } from 'react-router-dom';
 import ClassifiedDetailView from './ClassifiedDetailView';
 
 class ClassifiedAdsList extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -36,14 +35,16 @@ class ClassifiedAdsList extends Component {
     render() {
         const ads = this.state.listOfAds.map(function(value,index){
             return(
-                <li key={index} className="col-xs-6 col-sm-4">
-                    <ClassifiedAdMicro adDetails = {value} />
+                <li key={index} className="col-xs-6 col-sm-3">
+                    {/* <ClassifiedAdMicro adDetails = {value} /> */}
+                    <ClassifiedAd adDetails = {value} />
                 </li>
             )
         });
 
         return(
-            <ul className="row classified-list appr-microlist">
+            // <ul className="row classified-list appr-microlist">
+             <ul className="row classified-list">
                {ads}
             </ul>
         )
