@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AdCreatedConfirmation from './AdCreatedConfirmation';
+import Landing from './Landing';
 import { makeDroppable } from "../app/utilities/drag-and-drop.js";
 import uuid from 'uuid';
 const uuidv4 = require('uuid/v4');
@@ -175,7 +176,12 @@ class ClassifiedAdForm extends Component {
 
     render() {
         if (this.state.submitted == true) {
-            return <AdCreatedConfirmation />
+            return (
+                <div>
+                    <AdCreatedConfirmation />
+                    {/* <Landing /> */}
+                </div>
+            )
         } else {
             const categoryOptionsArray = (this.state.categories).map(function (value, index) {
                 return <option key={index} value={value}>{value}</option>;
