@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PrfImageLoader from './PrfImageLoader';
+import PrfWidgetBio from './PrfWidgetBio';
 import PrfBaseProfile from './PrfBaseProfile';
 
 const ListItemWidget =({title, content, editBtnName, editBtnHandler}) => ( 
@@ -37,26 +38,28 @@ const FollowWidget = ({numfollowers, numfollowing}) => (
   </ul>
 );
 
-const UpdateFormWidgetBio = ({initValue, changeHandler, cancelHandler, updateHandler}) =>(
-  <div>
-    <p>{initValue}</p>
-    { (toBeUpdated)
-      ? (
-      <form className='prf-update-form'>
-        <div className="form-group">
-          <textarea
-          placeholder='Update your Bio...'
-          className='form-control'
-          value={ initValue }
-          onChange={ changeHandler } />
-        </div>
-        <div className='btn-toolbar'>
-          <button type='button' value='cancel' className='btn btn-secondary btn-sm' onClick={ cancelHandler }>Cancel</button>
-          <button type='button' value='submit' className='btn btn-primary btn-sm' onClick={ updateHandler }>Update</button>
-        </div>
-      </form>) : null}
-    </div>
-);
+// const UpdateFormWidgetBio = ({initValue, changeHandler, cancelHandler, updateHandler}) =>(
+//   <div>
+//     <p>{initValue}</p>
+//     { (toBeUpdated)
+//       ? (
+//       <form className='prf-update-form'>
+//         <div className="form-group">
+//           <textarea
+//           placeholder='Update your Bio...'
+//           className='form-control'
+//           rows="5"
+//           cols="150"
+//           value={ initValue }
+//           onChange={ changeHandler } />
+//         </div>
+//         <div className='btn-toolbar'>
+//           <button type='button' value='cancel' className='btn btn-secondary btn-sm' onClick={ cancelHandler }>Cancel</button>
+//           <button type='button' value='submit' className='btn btn-primary btn-sm' onClick={ updateHandler }>Update</button>
+//         </div>
+//       </form>) : null}
+//     </div>
+// );
 
 export default class PrfProfileDetail extends PrfBaseProfile {
     constructor(props) {
@@ -75,7 +78,7 @@ export default class PrfProfileDetail extends PrfBaseProfile {
 
       //build content snippets
       let urls = urlList.map( (u) => {
-        return ( <p className="card-text">u</p> );
+        return ( <p className="card-text">{u}</p> );
       });
       let followers = followersList.length;
       let following = followingList.length;
@@ -89,17 +92,11 @@ export default class PrfProfileDetail extends PrfBaseProfile {
         return (<button type="button" className="btn btn-primary btn-sm"> {label} </button>);
       });
 
-      let updateablebio = (<UpdateFormWidgetBio initValue={this.state.bio} changeHandler={this.onBioChange} toBeUpdated={this.state.toBeUpdated}/>)
+      // let updateablebio = (<UpdateFormWidgetBio initValue={this.state.bio} changeHandler={this.onBioChange} toBeUpdated={this.state.toBeUpdated}/>);
+      let bioFragment = { _id:this.props.user._id, bio:this.props.user.bio };
 
       return (
         <div className="container-fluid">
-          <div className="card prf-errorbox">
-            {(this.state.alertMessage != '') ? (
-              <div className="alert alert-danger" role="alert">
-                {this.state.alertMessage}
-              </div>
-            ) : null}
-          </div>
           {/* ################# core user details #################### */}
           <div className="card-group prf-details">
             {/* card 1: user avatar and links */}
@@ -118,13 +115,13 @@ export default class PrfProfileDetail extends PrfBaseProfile {
                   <button type="button" className="btn btn-primary btn-block" onClick={this.props.onFollow}>Follow</button>
                 ):null}
               </div>
-              <div className="card-footer"></div>
             </div>
             {/* card 2: bio, categories, keywords etc */}
-            <div className="card prf-infobox">
+            <div className="card prf-stretchbox prf-infobox">
               <div className="card-body">
                 <div className="list-group">
                   <ListCaptionWidget captionText={this.state.username}/>
+                  {/* 
                   <div className="list-group-item list-group-item-action flex-column align-items-start">
                     <div className="d-flex w-100 justify-content-between">
                       <h3 className="mb-1">About me</h3>
@@ -157,12 +154,13 @@ export default class PrfProfileDetail extends PrfBaseProfile {
                     </div>
                     : null}
                   </div>
+                  */}
+                  <PrfWidgetBio userFragment={bioFragment} />
                   <ListItemWidget title='Links' content={urls} editBtnName={(this.props.ownerIsViewer)? 'Edit':null} />
                   <ListItemWidget title='My craft' content={categories} editBtnName={(this.props.ownerIsViewer)? 'Edit':null} />
                   <ListItemWidget title='Favorite tags' content={categories} editBtnName={(this.props.ownerIsViewer)? 'Edit':null} />
                 </div>
               </div>
-              <div className="card-footer"></div>
             </div>
           </div>
           {/* ################# user's media content #################### */}

@@ -39,6 +39,17 @@ img.card-img-left.prf-avatar {
   height: 10rem;
 }
 
+/* profile page */
+.prf-stretchbox {
+  margin: 0;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  align-self: stretch;
+}
+
 /* auth forms */
 .card.prf-authbox {
   background-color: #ebf2f5;

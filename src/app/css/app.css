@@ -6189,3 +6189,19 @@ a.badge.appr-nav-username:hover {
   .appr-microlist .col-sm-4 {
     flex: 0 0 25%;
     max-width: 25%; } }
+
+.card.prf-errorbox,
+.card-group.prf-details .card,
+.prf-infobox {
+  border: none;
+  background: none; }
+
+.card-group.prf-details {
+  background: url("/images/site/pexel-003.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed; }
+
+.prf-vcard.prf-infobox {
+  max-width: 22rem; }
