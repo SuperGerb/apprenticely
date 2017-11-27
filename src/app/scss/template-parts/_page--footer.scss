@@ -1,0 +1,20 @@
+.footer-bgimage{
+  //@include main-background-image(3rem, 0 bottom);  
+  width: 100%;
+  min-height: 3rem;
+  background: $appr-black;
+  background-repeat: no-repeat;
+  background-position: 0 bottom;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.copyright-text{
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-bottom: 0;
+}
