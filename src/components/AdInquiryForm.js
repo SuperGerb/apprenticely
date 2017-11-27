@@ -45,7 +45,7 @@ class AdInquiryForm extends Component {
 
     render() {
         return(
-            <div className="col-sm-4 offset-sm-4" >
+            <div className="col-md-6 offset-md-3 col-lg-4 offset-lg-4" >
                  <div className="card ad-inquiry-card">
                      <div className="card-block">
                          <h5>Respond to the ad</h5>
