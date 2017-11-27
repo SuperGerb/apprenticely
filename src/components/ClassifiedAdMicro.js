@@ -25,7 +25,7 @@ const ClassifiedAdMicro = (props) => {
       <div className="card" >
         <div className='appr-microlist-flexer'>
           <Link to={detailViewUrl}>
-              <div className="appr-microlist-thumbnail" style={ {background: `url(${imageSrc}) no-repeat center`} }>&nbsp;</div>
+              <div className="appr-microlist-thumbnail" style={ {backgroundImage: `url(${imageSrc})`} }>&nbsp;</div>
           </Link>
           <div className="card-block">
               <Link to={detailViewUrl}><p className="card-title">{title}</p></Link>
