@@ -1,48 +1,20 @@
 /*CLASSIFIED ADS LIST*/
 .classified-list{
-    list-style: none;
-    padding: 0px;
+  list-style: none;
+  padding: 0px;
 }
 
-.card{
-    margin-bottom: 2em;
+.ad-card-img-wrap{
+    height: 156px;
+    overflow: hidden; 
 }
 
-.card-title{
-    color: $brand-primary;
-    text-decoration: underline; 
-}
-
-a .card-text{
-    color: $body-color;
-    &:hover{
-        color: $body-color;
-    }
-}
-
-.card-text{
-    &:last-child{
-        margin-bottom: 1rem;
-    }
-}
-
-.card-img-top__image-wrap{
-    max-height: 300px;
-    overflow: hidden;
-}
-
-.card__classified-list-view{
+.ad-card{ 
     h4{
-        font-size: 1em;
         margin-bottom: 0;
     }
     .card-block{
         padding: 1rem;
-    }
-    .card-footer{
-        font-size: 0.7em;
-        font-style: italic;
-        padding: 0.2em;
-        border-top: 0;
+        height: 66px;
     }
 }

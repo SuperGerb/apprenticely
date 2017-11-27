@@ -12,6 +12,7 @@ import ClassifiedDetailView from './ClassifiedDetailView';
 import ClassifiedAdForm from './ClassifiedAdForm';
 import AdCreatedConfirmation from './AdCreatedConfirmation';
 import Landing from './Landing';
+import Footer from './Footer';
 import PrfProfilePage from './user/detail/PrfProfilePage';
 import isAuthed from './user/auth/PrfAuthCheck';
 
@@ -28,15 +29,16 @@ export default class App extends Component {
         <Navigation />
         <div className="container-fluid">
           <Switch>
-            <Route exact path='/' component={Landing} />
+            <Route exact path='/' component={Home} />
             <Route path='/welcome' component={Landing} />
-            <Route path='/home' component={isAuthed(Home)}/>
+            <Route path='/home' component={isAuthed(Home)} />
             <Route path='/classfiedDetailView' component={ClassifiedDetailView} />
             <Route path='/createClassifiedAd' component={ClassifiedAdForm} />
             <Route path='/adCreatedConfirmation' component={AdCreatedConfirmation} />
             <Route path="/user/:username" component={isAuthed(PrfProfilePage)} />
           </Switch>
         </div>
+        <Footer />
       </div>
     )
   }

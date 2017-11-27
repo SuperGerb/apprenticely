@@ -1,0 +1,44 @@
+/* BASE STYLES FOR ALL CARDS */
+/* CAREFUL WHEN EDITING BECAUSE CHANGES WILL AFFECT:
+
+  - classified ad thumbnails
+  - classified ad detail view
+  - profile thumbnails
+  - classified ad form 
+  - ad inquiry form
+  - etc!
+
+*/
+
+.card{
+  margin-bottom: 2em;
+  border: 1px transparent;
+}
+
+.card-title{
+  color: $brand-primary;
+  font-size: 1rem;
+  &:hover{
+    color: $link-hover-color;
+  }
+}
+
+.card-text,
+a .card-text{
+  color: $body-color;
+  font-size: 0.9rem;
+  font-weight: 300;
+  &:hover{
+      color: $body-color;
+  }
+  &:last-child{
+      margin-bottom: 1rem;
+  }
+}
+
+.card-footer{
+  font-size: 0.7rem;
+  font-style: italic;
+  padding: 0.2em 1.5em;;
+  border-top: 0;
+}

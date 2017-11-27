@@ -38,12 +38,12 @@
   },
   "scripts": {
     "startdb": "node src/server/startingMongoViaNode.js",
-    "sasstask": "node-sass --watch src/app/scss/app.scss -o src/app/css",
+    "sasstask": "node-sass --watch src/app/scss/app.scss -o public/css",
     "buildtask": "webpack --watch",
     "startdev": "concurrently -n \"SASS,WEBPK,APP\" \"yarn sasstask\" \"yarn buildtask\" \"nodemon src/server/server.js -e js,html\" ",
     "start": "node src/server/server.js"
   },
-  "devDependencies": {
+  "devDependencies": { 
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import AdCreatedConfirmation from './AdCreatedConfirmation';
-import Landing from './Landing';
+import Home from './Home';
+import ClassifiedDetailView from './ClassifiedDetailView';
+import { Redirect, BrowserRouter, history } from 'react-router-dom';
 import { makeDroppable } from "../app/utilities/drag-and-drop.js";
 import uuid from 'uuid';
 const uuidv4 = require('uuid/v4');
@@ -143,7 +145,7 @@ class ClassifiedAdForm extends Component {
                 formData.append(key, currentClassifiedAd[key])
             }
         });
-
+ 
         // For testing:
         // console.log("Contents of FormData: ");
         // for (let pair of formData.entries()) {
@@ -156,32 +158,24 @@ class ClassifiedAdForm extends Component {
         }).then(function (response) {
             //return response.json();
         }).then(function () {
-            //Set submitted to true and clear the currentAd object to make way for the next form submission:
+            //Set submitted to true:
             scope.setState({
-                submitted: true,
-                currentAd: {}
-                //If necessary, clear the form inputs:
-                // classifiedId: "",
-                // title: "",
-                // description: "",
-                // location: "",
-                // category: "",
-                // type: "",
-                // image: "",
-                // userId: "",
-                // status: "",
+                submitted: true
             });
         });
     }
 
     render() {
-        if (this.state.submitted == true) {
+        const detailViewUrl = "/classfiedDetailView?adId=" + this.state.currentAd.classifiedId;
+
+        if (this.state.submitted) {
             return (
-                <div>
-                    <AdCreatedConfirmation />
-                    {/* <Landing /> */}
-                </div>
-            )
+                //Or to redirect to the detail view of the newly created ad, use pathname: detailViewUrl, thorugh a permissions issue needs to be dealt with for it to work: Authorizer::validateSession - jsonwebtoken.verify / Failed (403 Forbidden)
+                <Redirect to={{
+                    pathname: '/home',
+                    state: { message: "Your ad has been successfully created!" }
+                }} push />
+            );
         } else {
             const categoryOptionsArray = (this.state.categories).map(function (value, index) {
                 return <option key={index} value={value}>{value}</option>;
@@ -193,43 +187,37 @@ class ClassifiedAdForm extends Component {
                             <h2>Create a classified ad</h2>
                             <form id="addClassifiedAdForm" name="addClassifiedAdForm">
                                 <input type="hidden" value={this.state.classifiedId} className="form-control" id="classifiedId" name="classifiedId" />
-                                <label htmlFor="title">Title</label>
+                                <label htmlFor="title" className="sr-only">Title</label>
                                 <div className="input-group">
-                                    <input type="text" value={this.state.title} className="form-control" id="title" name="title" placeholder="Title of the ad..." aria-describedby="basic-addon1" onChange={this.handleChangeInput} />
+                                    <input type="text" value={this.state.title} className="form-control" id="title" name="title" placeholder="Title" aria-describedby="basic-addon1" onChange={this.handleChangeInput} required/>
                                 </div>
-                                <br />
-                                <label htmlFor="description">Description</label>
+                                <label htmlFor="description" className="sr-only">Description</label>
                                 <div className="input-group">
-                                    <textarea value={this.state.description} className="form-control" id="description" name="description" aria-describedby="basic-addon1" onChange={this.handleChangeInput}></textarea>
+                                    <textarea value={this.state.description} className="form-control" id="description" name="description" placeholder="Description" aria-describedby="basic-addon1" onChange={this.handleChangeInput} required></textarea>
                                 </div>
-                                <br />
-                                <label htmlFor="location">Location</label>
+                                <label htmlFor="location" className="sr-only">Location</label>
                                 <div className="input-group">
-                                    <input type="text" value={this.state.location} className="form-control" id="location" name="location" aria-describedby="basic-addon1" onChange={this.handleChangeInput} />
+                                    <input type="text" value={this.state.location} className="form-control" id="location" name="location" placeholder="Location" aria-describedby="basic-addon1" onChange={this.handleChangeInput} required/>
                                 </div>
-                                <br />
-                                <label htmlFor="type">Type</label>
+                                <label htmlFor="type" className="sr-only">Offered or Wanted</label>
                                 <div className="input-group">
                                     <select id="type" name="type" onChange={this.handleChangeInput} >
                                         <option value="offered">Offered</option>
                                         <option value="wanted">Wanted</option>
                                     </select>
                                 </div>
-                                <br />
                                 <label htmlFor="category">Category</label>
                                 <div className="input-group">
                                     <select id="category" name="category" onChange={this.handleChangeInput} >
                                         {categoryOptionsArray}
                                     </select>
                                 </div>
-                                <br />
                                 <input type="hidden" value={this.state.userId} className="form-control" id="userId" name="userId" />
                                 <input type="hidden" value={this.state.status} className="form-control" id="status" name="status" />
                                 <div className="droppable" id="file-drop-zone">
                                     <p>Drop images to upload here</p>
                                 </div>
                                 <img src={this.state.previewImage} id="preview-img-tag" width="200px" />
-                                <br />
                                 <button type="submit" className="btn btn-primary" id="addClassifiedAd" onClick={this.handleSubmitNewAd}>Create ad</button>
                             </form>
                         </div>

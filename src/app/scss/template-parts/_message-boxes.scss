@@ -1,0 +1,27 @@
+.confirmation-message-box{
+    padding: 1em;
+    margin-bottom: 1em;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    background-color: rgba(46, 66, 85, 0.45);    
+}
+
+.confirmation-message-box p{
+    margin-bottom:0;
+    color: #fff;
+}
+
+// .confirmation-message-box{
+//     animation: hide-animation 0.6s ease-in 3s;
+// }
+
+// @keyframes hide-animation{
+//     0%{
+//         opacity: 1;
+//         visibility: visible;
+//     }
+//     100%{
+//         opacity: 0;
+//         visibility: hidden;
+//     }
+// }
