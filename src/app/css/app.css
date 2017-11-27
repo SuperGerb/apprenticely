@@ -6010,7 +6010,7 @@ a .card-text {
   margin-bottom: 1rem; }
 
 .card-img-top__image-wrap {
-  max-height: 300px;
+  height: 156px;
   overflow: hidden; }
 
 .card__classified-list-view h4 {
@@ -6018,7 +6018,8 @@ a .card-text {
   margin-bottom: 0; }
 
 .card__classified-list-view .card-block {
-  padding: 1rem; }
+  padding: 1rem;
+  height: 66px; }
 
 .card__classified-list-view .card-footer {
   font-size: 0.7em;
@@ -6164,7 +6165,8 @@ a.btn.accented:focus {
   padding: 0.5em;
   font-size: 1em;
   font-weight: normal;
-  background-color: #ff1461;
+  /* background-color: #ff1461; */
+  color: $teal;
   max-width: 275px; }
 
 a.badge.appr-nav-username:hover {
