@@ -11,6 +11,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: -1rem;
 }
 .appr-bgimage.short {
   min-height:300px;
@@ -21,6 +22,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  &.width-constrained{
+    max-width: 36rem;
+  }
 }
 .appr-hero-box {
   padding: 20px;
@@ -34,13 +38,33 @@
   color: rgb(236, 236, 236);
 }
 
+.appr-main-cta{
+  text-align: center;  
+  color: #fff;
+  margin-top: 1em;
+  cursor: pointer;
+  font-weight: 300;
+  i{
+    display: block; 
+    font-size: 2.4rem;
+    line-height: 1.3rem;
+  }
+}
+
+.appr-sign-up-cta{
+  @include main-background-image(3rem, 0 bottom);  
+  padding: 2rem;
+}
+
 .badge.appr-nav-username{
   padding: 0.5em;
   font-size: 1em;
   font-weight: normal;
-  background-color: darken($appr-pink,5);
+  //background-color: darken($appr-pink,5);
+  color: $teal;
   max-width: 275px;
 }
 a.badge.appr-nav-username:hover {
-  background-color: $appr-pink
+  // background-color: $appr-pink
+  color: lighten($teal, 5);
 }
