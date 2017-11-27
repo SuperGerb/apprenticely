@@ -1,0 +1,28 @@
+.btn {  
+//   margin: 0 1em 0 0; //(if needed, please just apply to inline buttons)
+}
+
+.btn.accented {
+  background-color: $appr-pink;
+  border-color: darken($appr-pink, 10);
+}
+
+a.btn.accented:focus {
+  color: $appr-lightpink;
+}
+
+.button-create-a-classified-ad{
+  position: fixed; 
+  z-index: 9;
+  right: 1rem; 
+  bottom: 2rem; 
+}
+
+@include media-breakpoint-down(md) {
+    .button-create-a-classified-ad{
+      position: absolute;
+      right: 0;
+      top: 0.5em; 
+      bottom: inherit;
+  }
+}
