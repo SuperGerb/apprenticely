@@ -3,35 +3,13 @@ import React, { Component } from "react";
 import { Redirect, Switch, Route, Link } from 'react-router-dom';
 import PrfHttpClient from 'profilic-client';
 import PrfProfileDetail from './PrfProfileDetail';
+import PrfWidgetMediaBox from './PrfWidgetMediaBox';
 const JWTDecode = require('jwt-decode');
-
-const PopupMessage = ({message}) => (
-  <div className="modal fade" id="alertbox" tabIndex="-1" role="dialog">
-    <div className="modal-dialog" role="document">
-      <div className="modal-content">
-        <div className="modal-header">
-          <h5 className="modal-title" id="exampleModalLabel">Notice</h5>
-          <button type="button" className="close" data-dismiss="modal">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div className="modal-body">
-          {message}
-        </div>
-        <div className="modal-footer">
-          <button type="button" className="btn btn-primary" data-dismiss="modal">OK</button>
-        </div>
-      </div>
-    </div>
-  </div>
-)
 
 export default class PrfProfilePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      alertMessage: '',
-      loggedOut: false,
       ownerIsViewer:false,
       profileViewer:null, //the person who is viewing this profile page
       profileOwner:null//the person whose profile this is
@@ -57,11 +35,6 @@ export default class PrfProfilePage extends Component {
     this.prfClient.getProfilesByUsernameList( [this.props.match.params.username, decodedUser.username], this.onProfilesFetched);
   }
 
-  notifyOnFollow = ()=> {
-    console.log("PrfProfilePage::notifyOnFollow");
-    this.prfClient.addFollowFrom(this.state.profileViewer, this.state.profileOwner, this.onFollowed);
-  }
-  
   onProfilesFetched = (responseData) => {
     console.log("PrfProfilePage::onProfilesFetched");
     if(!responseData) {
@@ -83,37 +56,16 @@ export default class PrfProfilePage extends Component {
     }
   }
 
-  onFollowed = (responseData) => {
-    console.log("PrfProfilePage::onFollowed");
-    if(!responseData) {
-      this.setState({alertMessage:"A problem occured... Please try again"}, function(){
-        $('#alertbox').modal('toggle');        
-      });
-    } else {
-      console.log(responseData); //should return updated follower, followed.
-      //findProfileOwner
-      let ownername = this.props.match.params.username;
-      let viewername = this.state.profileViewer.username;
-      let owner = responseData.profileList.find( p => p.username == ownername );
-      let viewer = responseData.profileList.find( p => p.username == viewername );
-      this.setState({ profileOwner: owner, profileViewer: viewer});
-    }
-  }
-
   render=()=>{
     if(this.state.loggedOut) {
       return( <Redirect to={this.defaultLogoutPath} from={this.props.match.url} push /> );
     }
+    if(!this.state.profileOwner) return null; //display only once the profile info is ready
+    let medialist = this.state.profileOwner.hasOwnProperty('medialist') ? this.state.profileOwner.medialist : [];
     return(
       <div className="container-fluid">
-        {/* display only once the profile info is ready */}
-        {(this.state.profileOwner)?
-          <PrfProfileDetail user={this.state.profileOwner} viewer={this.state.profileViewer} ownerIsViewer={this.state.ownerIsViewer}
-          onFollow={this.notifyOnFollow} />
-        : null}
-
-        {/* popup alertbox */}
-        <PopupMessage message={this.state.alertMessage}/>
+        <PrfProfileDetail user={this.state.profileOwner} viewer={this.state.profileViewer} ownerIsViewer={this.state.ownerIsViewer}/>
+        <PrfWidgetMediaBox userFragment={ {_id:this.state.profileOwner._id, medialist:medialist} } ownerIsViewer={this.state.ownerIsViewer}/>
       </div>
     );
   }

@@ -8,10 +8,59 @@
   margin-right: 0;
 }
 
-/* flexbox container for media widgets */
+/* flexbox container for media widgets & media uploads */
+.form-group.prf-file-input {
+  margin-bottom: 0;
+}
+.form-group.prf-file-input input.form-control {
+  border: none;
+  border-radius: 0;
+}
+.prf-nomedia {
+  background-color: rgba(222, 222, 222, 0.5);
+  height: 275px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 2em;
+  color: rgb(88, 88, 88);
+  text-align: center;
+}
+.prf-mediabox-wrap {
+  background-color: #292b2c;
+  padding: 2em;
+}
 .prf-mediabox {
   display: flex;
   flex-wrap: wrap;
+}
+.prf-mediabox-item {
+  width: 33.33vw;
+}
+.prf-mediabox-item h4, .prf-mediabox-item h3, .prf-mediabox-item h2 {
+  background: #505050;
+  padding: 5px;
+  margin: 0;
+  font-size: 1.2em;
+  text-align: center;
+}
+.prf-media-choices {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #505050;
+}
+.prf-media-choices .btn {
+  flex-grow: 1;
+  margin: 0;
+  border-radius: 0;
+}
+.form-group.prf-uploadctrls {
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: -5px;
 }
 
 /* vertical cards */
@@ -25,6 +74,9 @@
 }
 .card.prf-vcard.prf-infobox {
   margin: 0;
+}
+img.card-img-top.prf-avatar {
+  border-radius: 4px;
 }
 
 
