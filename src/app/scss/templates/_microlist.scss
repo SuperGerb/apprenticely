@@ -17,6 +17,9 @@
 .appr-microlist-thumbnail {
   width:150px;
   height:150px;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
@@ -40,7 +43,7 @@
   }
   .appr-microlist li .card {
     width: auto;
-    height: auto;
+    height: auto; 
     overflow: visible;
   }
   .appr-microlist-flexer {

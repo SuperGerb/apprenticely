@@ -1,0 +1,13 @@
+@mixin main-background-image($min-height, $background-position) {
+  width:100%;
+  min-height: $min-height;
+  background: url('/images/site/apprcover.jpg');
+  background-repeat: no-repeat;
+  background-position: $background-position;
+  background-size:cover;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

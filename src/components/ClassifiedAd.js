@@ -14,7 +14,7 @@ const ClassifiedAd = (props) => {
     }
 
     //Convert the datePosted string from the database back into a js Date object: 
-    const dateAdWasPosted = new Date(datePosted);
+    const dateAdWasPosted = new Date(datePosted); 
     const todaysDate = new Date();
     let timeElapsedSincePosted = calculateTimeElapsed(dateAdWasPosted, todaysDate);
 
@@ -22,14 +22,14 @@ const ClassifiedAd = (props) => {
     let shortDesc = truncateCopy(description, 20);
 
     return (
-        <div className="card text-center card__classified-list-view" >
+        <div className="card text-center ad-card" >
             <Link to={detailViewUrl}>
-                <div className="card-img-top__image-wrap">
+                <div className="ad-card-img-wrap">
                     <img className="card-img-top" src={imageSrc} alt="Image caption" />
                 </div>
             </Link>
             <div className="card-block">
-                <Link to={detailViewUrl}><h4 className="card-title">{title}</h4></Link>
+                <Link to={detailViewUrl}><h4 className="card-title ad-card-title">{title}</h4></Link>
             </div>
             <Link to={detailViewUrl}><div className="card-footer text-muted">{timeElapsedSincePosted}</div></Link>
         </div >
