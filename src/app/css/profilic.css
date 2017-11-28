@@ -37,13 +37,17 @@
 }
 .prf-mediabox-item {
   width: 33.33vw;
+  background-color: #636363;
+  padding: 10px;
+  border-radius: 5px;
 }
 .prf-mediabox-item h4, .prf-mediabox-item h3, .prf-mediabox-item h2 {
-  background: #505050;
+  background: #636363;
   padding: 5px;
   margin: 0;
   font-size: 1.2em;
   text-align: center;
+ color: #d2c5c9;
 }
 .prf-media-choices {
   display: flex;
@@ -101,6 +105,10 @@ img.card-img-left.prf-avatar {
   justify-content: stretch;
   align-self: stretch;
 }
+ul.list-group.prf-user-links li a {
+  font-family: monospace;
+  padding: 0 0 5px 5px;
+}
 
 /* auth forms */
 .card.prf-authbox {
@@ -108,15 +116,12 @@ img.card-img-left.prf-avatar {
   padding: 1em;
 }
 
-/* media items */
-.card.prf-mediabox-item {
-  width: 33.3%;
-}
-
+/* image loader items */
 .prf-imgloader img, .prf-imgcontent img {
   width: 100%;
 }
 
+/* media queries */
 @media (max-width: 600px) {
   .card-group .card.prf-infobox{
       max-width: 100%;

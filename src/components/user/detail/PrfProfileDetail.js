@@ -3,6 +3,7 @@ import PrfImageLoader from './PrfImageLoader';
 import PrfWidgetBio from './PrfWidgetBio';
 import PrfWidgetAvatar from './PrfWidgetAvatar';
 import PrfWidgetFollows from './PrfWidgetFollows';
+import PrfWidgetLinks from './PrfWidgetLinks';
 
 const ListItemWidget =({title, content, editBtnName, editBtnHandler}) => ( 
   <div className="list-group-item list-group-item-action flex-column align-items-start">
@@ -35,14 +36,10 @@ export default class PrfProfileDetail extends Component {
     render =()=>{
       //we support flexible user entities, so eventually these need to evolve into handlers that
       //detect config settings (like enableAvatars, enableFollows, etc and not render anything at all, as needed )
-      let urlList = this.props.user.hasOwnProperty("urls") ? this.props.user.urls : [];
       let categoryList = this.props.user.hasOwnProperty("categories") ? this.props.user.categories : [];
       let folksonomyTerms = this.props.user.hasOwnProperty("folkterms") ? this.props.user.keywords : [];
 
       //build content snippets
-      let urls = urlList.map( (u) => {
-        return ( <p className="card-text">{u}</p> );
-      });
       let categories = categoryList.map( (catlabel) => {
         return (<button type="button" className="btn btn-primary btn-sm"> {catlabel} </button>);
       });
@@ -63,6 +60,9 @@ export default class PrfProfileDetail extends Component {
       let ownerFragment = { _id:this.props.user._id, username:this.props.user.username, followers:ownerFollowersList, following:ownerfollowingList };
       let viewerFragment = { _id:this.props.viewer._id, username:this.props.viewer.username, following:viewerFollowingList };
 
+      let linkList = this.props.user.hasOwnProperty("links") ? this.props.user.links : '';
+      let linksFragment = { _id:this.props.user._id, links: linkList};
+
       return (
         <div className="card-group prf-details">
           {/* card 1: user avatar and links */}
@@ -78,7 +78,7 @@ export default class PrfProfileDetail extends Component {
               <div className="list-group">
                 <ListCaptionWidget captionText={this.props.user.username}/>
                 <PrfWidgetBio userFragment={bioFragment} editable={this.props.ownerIsViewer} />
-                <ListItemWidget title='Links' content={urls} editBtnName={(this.props.ownerIsViewer)? 'Edit':null} />
+                <PrfWidgetLinks userFragment={linksFragment} editable={this.props.ownerIsViewer} />
                 <ListItemWidget title='My craft' content={categories} editBtnName={(this.props.ownerIsViewer)? 'Edit':null} />
                 <ListItemWidget title='Favorite tags' content={categories} editBtnName={(this.props.ownerIsViewer)? 'Edit':null} />
               </div>

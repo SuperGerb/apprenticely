@@ -21,6 +21,7 @@ module.exports = {
         path: __dirname + "/public",
         filename: "bundle.js"
     },
+    resolve: { symlinks: false },//stop faffing about with my linked projs!
     module: {
         loaders: [
             {

@@ -63,7 +63,7 @@ export default class PrfWidgetBio extends Component {
     if(this.props.editable && !this.state.updatingBio) {
       return(
         <div>
-          <button type="button" className="btn btn-sm" onClick={this.beginBioEdits}><i className="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+          <button type="button" className="btn btn-primary" onClick={this.beginBioEdits}><i className="fa fa-pencil-square-o" aria-hidden="true"></i></button>
         </div>
       );
     } else {

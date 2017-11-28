@@ -46,7 +46,7 @@ export default class PrfWidgetFollows extends Component {
     if (!this.state.alreadyFollowed) {
       return(<button type='button' className='btn btn-primary btn-block' onClick={this.triggerUpdateFollowers}>Follow</button>);
     } else {
-      return(<button type='button' class='btn btn-outline-info btn-block' onClick={this.triggerUpdateFollowers}>Unfollow</button>);
+      return(<button type='button' className='btn btn-outline-info btn-block' onClick={this.triggerUpdateFollowers}>Unfollow</button>);
     }
   }
 
