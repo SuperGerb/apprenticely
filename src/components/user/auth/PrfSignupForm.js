@@ -10,7 +10,7 @@ export default class PrfSignupForm extends PrfBaseAuthForm {
 
   render() {
     if(this.state.authComplete) {
-      return( <Redirect to="/home" from="/welcome/signup" push /> );
+      return( <Redirect to={`/user/${this.lastSignupAttempt.username}`} from="/welcome/signup" push /> );
     } else {
       return (
         <div className="card prf-authbox">

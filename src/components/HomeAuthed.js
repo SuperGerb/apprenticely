@@ -10,13 +10,13 @@ export default class Home extends Component {
     super(props);
     this.state = {
       profileList: [],
-      adLimit: 1,
+      adLimit: 0 
     };
     this.prfClient = new PrfHttpClient();
   }
 
   componentDidMount = () => {
-    this.getLatestProfiles(); 
+    this.getLatestProfiles();
     this.fadeOutMessageBox();
   }
 
@@ -56,17 +56,17 @@ export default class Home extends Component {
           {message ? <div className="confirmation-message-box"><p>{message}</p></div> : null}
           <div className="row appr-hero width-constrained">
             <div className="appr-hero-box">
-              <h4 className="appr-hero-caption">Find collabs, gigs, equipment, constructive critiques and more.</h4>
+              <h4 className="appr-hero-caption">Welcome! <br/> Find collabs, gigs, equipment, constructive critiques and more.</h4>
               {/* <p className="appr-hero-copy">Apprenticely gathers together the best postings relating to the arts. See what others are working on. Pick up a new hobby. Post samples of your latest project.</p>
               The journey to mastery begins with practice */}
             </div>
           </div>
-          <p className="appr-main-cta" onClick={this.scrollToPostings}>browse the latest postings<i className="fa fa-angle-down" aria-hidden="true"></i></p>
+          <p className="appr-main-cta" onClick={this.scrollToPostings}>browse all postings<i className="fa fa-angle-down" aria-hidden="true"></i></p>
         </section>
         <section className="appr-main">
           <div>
-            <h3 className="appr-main-caption">Latest announcements</h3>
-            <ClassifiedAdsList adLimit = {this.state.adLimit}/>  
+            <h3 className="appr-main-caption">Announcements</h3>
+            <ClassifiedAdsList adLimit = {this.state.adLimit}/> 
             <h3 className="appr-main-caption"> Our newest Members</h3>
             <PrfUserProfileList profileList={this.state.profileList}
               orientation="vertical"/>
