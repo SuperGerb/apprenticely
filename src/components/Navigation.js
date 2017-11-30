@@ -16,7 +16,6 @@ export default class Navigation extends Component {
     this.defaultNoAuthPath = process.env.PRF_DEFAULT_NOAUTH_PATH || "/";
     this.prfClient = new PrfHttpClient();
     this.unlisten = this.props.history.listen((location, action) => {
-      console.log("*** route change ***");
       this.prfClient.authenticate(this.checkAuthResult);
     });
   }
@@ -25,14 +24,6 @@ export default class Navigation extends Component {
     //because the first listen doesn't fire on direct url hit (e.g. loading the page directly):
     this.prfClient.authenticate(this.checkAuthResult);
   }
-
-  getCurrentUsername = () => {
-    let token = localStorage.getItem('prf_authtoken');
-    if(!token) return;
-    let decodedUser = JWTDecode(token);
-    return (decodedUser.username);
-  }
-    
 
   componentWillUnmount = () => {
     if(this.unlisten) this.unlisten();
@@ -45,8 +36,9 @@ export default class Navigation extends Component {
         this.setState({isAuthed:false});
     } else {
         console.log('Navigation::checkAuthResult - still authed');
-        let curUsername = this.getCurrentUsername();
-        this.setState({isAuthed:true, username:curUsername});
+        let uname = this.prfClient.getAuthedUsername();
+        let uid = this.prfClient.getAuthedID();
+        this.setState({isAuthed:true, username:uname});
     }
   }
 
@@ -57,7 +49,7 @@ export default class Navigation extends Component {
     this.props.history.push(this.defaultNoAuthPath);
   }
 
-  render = () => {
+  render () {
     return (
       <nav className="navbar navbar-toggleable-md navbar-inverse bg-inverse sticky-top">
         <button className="navbar-toggler navbar-toggler-right hidden-print" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +57,7 @@ export default class Navigation extends Component {
         </button>
         <Link className="navbar-brand" to="/home"><img src="/images/site/apprlogo.png" alt="Apprenticely logo" /></Link><h1 className="sr-only">Logo</h1>
         {(this.state.isAuthed) ? (
-          <a className="badge appr-nav-username" href={`/user/${this.state.username}`}>Logged in as {this.state.username}</a>
+          <a className="badge appr-nav-username" href={`/user/${this.state.username}`}>Logged in as <span className="accented">{this.state.username}</span></a>
         ) : null}
         <div className="collapse navbar-collapse hidden-print" id="navbarSupportedContent">
           {(this.state.isAuthed) ? (
@@ -75,15 +67,15 @@ export default class Navigation extends Component {
               </li>
             </ul>
           ) : (
-              <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
-                  <Link className="nav-link" to="/welcome/signup">Sign up</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/welcome/login">Log in</Link>
-                </li>
-              </ul>
-            )}
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to="/welcome/signup">Sign up</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/welcome/login">Log in</Link>
+              </li>
+            </ul>
+          )}
           <Searchbar />
         </div>
       </nav>

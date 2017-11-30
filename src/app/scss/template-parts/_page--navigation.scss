@@ -4,6 +4,30 @@
 }
 
 .navbar{
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   font-weight: 300;
+}
+
+a.navbar-brand img {
+  max-width: 275px;
+}
+
+.mr-auto {
+  padding-left: 0.5em;
+}
+
+input#search-field {
+  margin-left: 0.5em;
+}
+
+.badge.appr-nav-username{
+  padding: 0.5em;
+  font-size: 1em;
+  font-weight: normal;
+  color: $appr-grey;
+  max-width: 275px;
+  text-align: left;
+}
+a.badge.appr-nav-username:hover {
+  color: lighten($appr-grey, 5);
 }

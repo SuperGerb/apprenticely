@@ -4,12 +4,29 @@
   padding: 0px;
 }
 
+/* these styles, probably because it has the token 'ad', causes it to be picked up by ad-blockers...*/
+/*
 .ad-card-img-wrap{
     height: 156px;
     overflow: hidden; 
 }
 
 .ad-card{ 
+    h4{
+        margin-bottom: 0;
+    }
+    .card-block{
+        padding: 1rem;
+        height: 66px;
+    }
+}
+*/
+.announce-card-img-wrap{
+    height: 156px;
+    overflow: hidden; 
+}
+
+.announce-card{ 
     h4{
         margin-bottom: 0;
     }

@@ -53,7 +53,6 @@ export default class PrfWidgetMediaItem extends Component {
     } else {
       itembody = (<p>
       TODO: Can hold photo|video widget|audio widget<br/>
-      video + sound externally hosted for now (e.g. via user's youtube, soundcloud)
       </p>);
     }
 

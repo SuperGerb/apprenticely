@@ -1,6 +1,6 @@
 /* layout */
 body {
-  //background-color: $appr-black;
+  background-color: $appr-black;
   color: #989898;
   font-family: 'Montserrat';
 }
@@ -25,16 +25,12 @@ a:hover,
 a:focus{
 	text-decoration: none;
 }
+p.accented, span.accented {
+  color: $appr-pink;
+}
 
 /* images */
 img{
     width: 100%;
     height: auto;
-}
-a.navbar-brand img {
-  max-width: 275px;
-}
-
-.navbar {
-margin-bottom: 0;
 }

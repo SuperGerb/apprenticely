@@ -108,12 +108,13 @@ A copy of Bootstrap's _variables.scss file, for the purpose of overriding the Bo
   // Create grayscale
   $gray-dark:                 #292b2c !default;
   $gray:                      #464a4c !default;
+  $appr-grey:                 #5a5a5a !default;
   $gray-light:                #636c72 !default;
   $gray-lighter:              #eceeef !default;
   $gray-lightest:             #f7f7f9 !default;
   
   // Reassign color vars to semantic color scheme
-  $brand-primary:             $teal; //$blue !default;
+  $brand-primary:             $appr-grey; //$teal; //$blue !default;
   $brand-success:             $green !default;
   $brand-info:                $teal !default;
   $brand-warning:             $orange !default;
