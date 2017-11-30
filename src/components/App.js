@@ -8,6 +8,7 @@ import PrfHttpClient from 'profilic-client';
 //components
 import Navigation from './Navigation';
 import Home from './Home';
+import HomeAuthed from './HomeAuthed';
 import ClassifiedDetailView from './ClassifiedDetailView';
 import ClassifiedAdForm from './ClassifiedAdForm';
 import AdCreatedConfirmation from './AdCreatedConfirmation';
@@ -31,7 +32,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/welcome' component={Landing} />
-            <Route path='/home' component={isAuthed(Home)} />
+            <Route path='/home' component={isAuthed(HomeAuthed)} />
             <Route path='/classfiedDetailView' component={ClassifiedDetailView} />
             <Route path='/createClassifiedAd' component={ClassifiedAdForm} />
             <Route path='/adCreatedConfirmation' component={AdCreatedConfirmation} />
