@@ -64,14 +64,16 @@ export default class Home extends Component {
         </section>
         <section className="appr-main">
           <div>
+            <h3 className="appr-main-caption">Latest announcements</h3>
             <ClassifiedAdsList /> 
-            <h3>Our newest Members</h3>
+            <h3 className="appr-main-caption"> Our newest Members</h3>
             <PrfUserProfileList profileList={this.state.profileList}
-              orientation="vertical"
-              notifyOnChanges={this.getLatestProfiles} />
+              orientation="vertical"/>
           </div>
         </section>
-        <SignupCTA />
+        {(!this.prfClient.getAuthedUsername()) ? (
+          <SignupCTA />
+        ) : null }
       </div>
     );
   }

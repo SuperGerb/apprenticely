@@ -4,12 +4,12 @@ import ClassifiedAdMicro from './ClassifiedAdMicro';
 import { Link } from 'react-router-dom';
 import ClassifiedDetailView from './ClassifiedDetailView';
 
-class ClassifiedAdsList extends Component {
+export default class ClassifiedAdsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       listOfAds: []
-    }
+    };
   }
 
   componentDidMount() {
@@ -43,12 +43,9 @@ class ClassifiedAdsList extends Component {
     });
 
     return (
-      //  <ul className="row classified-list appr-microlist">
-       <ul className="row classified-list">
+      <ul className="row classified-list">
         {ads}
       </ul>
-    )
+    );
   }
 }
-
-export default ClassifiedAdsList;

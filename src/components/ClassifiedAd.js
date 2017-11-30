@@ -22,14 +22,14 @@ const ClassifiedAd = (props) => {
     let shortDesc = truncateCopy(description, 20);
 
     return (
-        <div className="card text-center ad-card" >
+        <div className="card text-center announce-card" >
             <Link to={detailViewUrl}>
-                <div className="ad-card-img-wrap">
+                <div className="announce-card-img-wrap">
                     <img className="card-img-top" src={imageSrc} alt="Image caption" />
                 </div>
             </Link>
             <div className="card-block">
-                <Link to={detailViewUrl}><h4 className="card-title ad-card-title">{title}</h4></Link>
+                <Link to={detailViewUrl}><h4 className="card-title announce-card-title">{title}</h4></Link>
             </div>
             <Link to={detailViewUrl}><div className="card-footer text-muted">{timeElapsedSincePosted}</div></Link>
         </div >

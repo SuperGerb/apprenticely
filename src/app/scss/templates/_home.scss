@@ -52,19 +52,12 @@
 }
 
 .appr-sign-up-cta{
-  @include main-background-image(3rem, 0 bottom);  
+  /*@include main-background-image(3rem, 0 bottom);*/
   padding: 2rem;
+  background-color: $appr-black;
+  text-align: center;
 }
 
-.badge.appr-nav-username{
-  padding: 0.5em;
-  font-size: 1em;
-  font-weight: normal;
-  //background-color: darken($appr-pink,5);
-  color: $teal;
-  max-width: 275px;
-}
-a.badge.appr-nav-username:hover {
-  // background-color: $appr-pink
-  color: lighten($teal, 5);
+.appr-main-caption  {
+  text-align: center;
 }

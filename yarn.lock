@@ -3620,9 +3620,9 @@ process@^0.11.1, process@^0.11.10:
   version "0.11.10"
   resolved "https://registry.yarnpkg.com/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
 
-profilic-client@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/profilic-client/-/profilic-client-0.0.6.tgz#a4f265eda544c980daae34bc0ed1dfe92f0a228f"
+profilic-client@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/profilic-client/-/profilic-client-0.0.7.tgz#8343c9beeebbf0b3b0fa32164df693af5e74bc8a"
   dependencies:
     axios "^0.16.2"
 

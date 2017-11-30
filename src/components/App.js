@@ -20,7 +20,7 @@ import isAuthed from './user/auth/PrfAuthCheck';
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.prfClient = new PrfHttpClient();
+    // this.prfClient = new PrfHttpClient();
   }
 
   render() {
