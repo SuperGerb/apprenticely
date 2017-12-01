@@ -19,21 +19,21 @@ const ClassifiedAdMicro = (props) => {
     let timeElapsedSincePosted = calculateTimeElapsed(dateAdWasPosted, todaysDate);
 
     //Truncate the description ensuring to not place ellipsis in the middle of a word or after a punctuation symbol:
-    let shortDesc = truncateCopy(description, 70);
+    let shortDesc = truncateCopy(description, 100);
+    let cssString = (type == "wanted") ? "fa fa-hand-paper-o fa-2x wanted" : "fa fa-hand-o-right fa-2x offered";
 
-    return (
-      <div className="card" >
-        <div className='appr-microlist-flexer'>
-          <Link to={detailViewUrl}>
-              <div className="appr-microlist-thumbnail" style={ {backgroundImage: `url(${imageSrc})`} }>&nbsp;</div>
-          </Link>
-          <div className="card-block">
-              <Link to={detailViewUrl}><p className="card-title">{title}</p></Link>
-              <Link to={detailViewUrl}><small className="card-text">{shortDesc}</small></Link>
-          </div>
-        </div>
-      </div >
-    );
+  return (
+    <div className="card appr-horiz-ad">
+      {/* ad images will not work until a cdn solution is in place */}
+      {/*<div className="card-img-left" style={ {backgroundImage: `url(${imageSrc})`} }/> */}
+      <i className={cssString} aria-hidden="true"></i>
+      <div className="card-body d-flex flex-column">
+          <h3 className="card-title"><Link to={detailViewUrl}>{title}</Link></h3>
+          <p className="card-text">{shortDesc}</p>
+          <small><i>{timeElapsedSincePosted}</i></small>
+      </div>    
+    </div>
+  );
 }
 
 export default ClassifiedAdMicro;

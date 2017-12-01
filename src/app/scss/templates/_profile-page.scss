@@ -26,13 +26,54 @@
 }
 
 /* tab panels */
+#profileDetailContent .tab-content, #profileDetailContent .tab-pane {
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
 .nav-tabs {
-  margin-bottom: -3px;
+  margin-bottom: 1px;
   border-bottom: none;
+  margin-left: 5px;
 
   .nav-link {
     background-color: $appr-grey;
     color: #ffffff;
     border: none;
   }
+}
+
+
+.appr-horiz-ad {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  margin:0;
+
+  .fa {
+    padding: 10px;
+  }
+
+  .fa.wanted {
+    color: $appr-pink;
+  }
+
+  .fa.offered {
+    color: $appr-teal;
+  }
+}
+
+p.appr-prompt {
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: 7px;
+  width:100%;
+}
+
+.appr-prompt.wanted {
+  background-color: $appr-lightpink;
+}
+
+.appr-prompt.offered {
+  background-color: lighten($appr-teal, 15%);
 }

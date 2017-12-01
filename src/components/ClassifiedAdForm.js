@@ -5,6 +5,7 @@ import ClassifiedDetailView from './ClassifiedDetailView';
 import { Redirect, BrowserRouter, history } from 'react-router-dom';
 import { makeDroppable } from "../app/utilities/drag-and-drop.js";
 import uuid from 'uuid';
+import PrfHttpClient from 'profilic-client';
 const uuidv4 = require('uuid/v4');
 
 //To do: make location a select
@@ -13,6 +14,8 @@ const uuidv4 = require('uuid/v4');
 class ClassifiedAdForm extends Component {
     constructor(props) {
         super(props);
+        this.prfClient = new PrfHttpClient();
+        let postOwner = this.prfClient.getAuthedUsername();
         this.state = {
             submitted: false,
             classifiedId: "",
@@ -24,7 +27,7 @@ class ClassifiedAdForm extends Component {
             type: "",
             images: [],
             previewImage: "",
-            userId: "",
+            userId: postOwner || "",
             status: "",
             datePosted: "",
             currentAd: {}
@@ -119,7 +122,7 @@ class ClassifiedAdForm extends Component {
             category: this.state.category,
             type: this.state.type,
             images: this.state.images,
-            userId: "123",
+            userId: this.postOwner || "", //"123",
             status: "open",
             datePosted: currentDate
         }
