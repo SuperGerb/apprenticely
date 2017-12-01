@@ -6,6 +6,7 @@ import PrfWidgetAvatar from './PrfWidgetAvatar';
 import PrfWidgetFollows from './PrfWidgetFollows';
 import PrfWidgetLinks from './PrfWidgetLinks';
 import ClassifiedAdMicro from '../../ClassifiedAdMicro';
+import { Tabs, Tab } from 'react-bootstrap-tabs';
 
 const ListItemWidget = ({ title, content, editBtnName, editBtnHandler }) => (
   <div className="list-group-item list-group-item-action flex-column align-items-start">
@@ -38,7 +39,13 @@ export default class PrfProfileDetail extends Component {
   }
 
   // componentDidMount = () => {
-  //   $('#divID').css("background-image", "url(/myimage.jpg)");
+  //   //$('#divID').css("background-image", "url(/myimage.jpg)");
+  //   $('#profileDetailTabset a').click(function (e) {
+  //     e.preventDefault();
+  //     console.log('clicked!');
+  //     console.log($(this));
+  //     $(this).tab('show');
+  //   })
   // }
 
 
@@ -121,11 +128,11 @@ export default class PrfProfileDetail extends Component {
     ];
 
     let wanteds = ads.filter(ad => ad.type == "wanted").map((ad) => {
-      return (<ClassifiedAdMicro adDetails={ad} />);
+      return (<ClassifiedAdMicro adDetails={ad} key={ad.classifiedId} />);
     });
 
     let offereds = ads.filter(ad => ad.type == "offered").map((ad) => {
-      return (<ClassifiedAdMicro adDetails={ad} />);
+      return (<ClassifiedAdMicro adDetails={ad} key={ad.classifiedId} />);
     });
 
     return (
@@ -141,53 +148,48 @@ export default class PrfProfileDetail extends Component {
         {/* card 2: bio, categories, keywords etc */}
         <div className="card prf-stretchbox prf-infobox">
           <div className="card-body">
-            <ul className="nav nav-tabs" id="profileDetailTabset" role="tablist">
-              <li className="nav-item">
-                <a className="nav-link active" id="profileDetailAbout" href="#aboutContent" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">About</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" id="profileDetailNeeds" href="#needsContent" data-toggle="tab" role="tab" aria-controls="needs" aria-selected="false">Needs</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" id="profileDetailOffers" href="#offersContent" data-toggle="tab" role="tab" aria-controls="offers" aria-selected="false">Offers</a>
-              </li>
-            </ul>
-            <div className="tab-content" id="profileDetailContent">
-              <div className="tab-pane show active" id="aboutContent" role="tabpanel" aria-labelledby="profileDetailAbout">
-                <div className="card prf-infobox">
-                  <div className="card-body">
-                    <div className="list-group">
-                      <PrfWidgetBio userFragment={bioFragment} editable={this.props.ownerIsViewer} />
-                      <PrfWidgetLinks userFragment={linksFragment} editable={this.props.ownerIsViewer} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="tab-pane" id="needsContent" role="tabpanel" aria-labelledby="profileDetailNeeds">
-                <div className="card prf-infobox">
-                  <div className="card-body">
-                    <div className="list-group-item list-group-item-action flex-column align-items-start">
-                      <p className="appr-prompt wanted"><b>{this.props.user.username}</b> is on the lookout for a few things. Maybe you can lend a hand?</p>
-                      <div>
-                        {wanteds}
+            <Tabs onSelect={(index, label) => console.log(label + ' selected')}>
+              <Tab label="About">
+                <div className="tab-pane show active" id="aboutContent" role="tabpanel" aria-labelledby="profileDetailAbout">
+                  <div className="card prf-infobox">
+                    <div className="card-body">
+                      <div className="list-group">
+                        <PrfWidgetBio userFragment={bioFragment} editable={this.props.ownerIsViewer} />
+                        <PrfWidgetLinks userFragment={linksFragment} editable={this.props.ownerIsViewer} />
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="tab-pane" id="offersContent" role="tabpanel" aria-labelledby="profileDetailOffers">
-                <div className="card prf-infobox">
-                  <div className="card-body">
-                    <div className="list-group-item list-group-item-action flex-column align-items-start">
-                      <p className="appr-prompt offered"><b>{this.props.user.username}</b> has a few things to offer!</p>
-                      <div>
-                        {offereds}
+              </Tab>
+              <Tab label="Needs">
+                <div className="tab-pane" id="needsContent" role="tabpanel" aria-labelledby="profileDetailNeeds">
+                  <div className="card prf-infobox">
+                    <div className="card-body">
+                      <div className="list-group-item list-group-item-action flex-column align-items-start">
+                        <p className="appr-prompt wanted"><b>{this.props.user.username}</b> is on the lookout for a few things. Maybe you can lend a hand?</p>
+                        <div>
+                          {wanteds}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </Tab>
+              <Tab label="Offers">
+                <div className="tab-pane" id="offersContent" role="tabpanel" aria-labelledby="profileDetailOffers">
+                  <div className="card prf-infobox">
+                    <div className="card-body">
+                      <div className="list-group-item list-group-item-action flex-column align-items-start">
+                        <p className="appr-prompt offered"><b>{this.props.user.username}</b> has a few things to offer!</p>
+                        <div>
+                          {offereds}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Tab>
+            </Tabs>
           </div>
         </div>
       </div>
