@@ -8,14 +8,19 @@ export default class ClassifiedAdsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listOfAds: []
+      listOfAds: [] 
     };
   }
 
   componentDidMount() {
     const scope = this;
-
-    fetch('/classifiedsListView', {
+    let adLimit;
+    if(this.props.adLimit !== undefined){
+      adLimit = this.props.adLimit;
+    }else{
+      adLimit = 0;  //
+    }
+    fetch('/classifiedsListView?adLimit=' + this.props.adLimit, {
       method: 'get'
     }).then(function (response) {
       if (response.status !== 200) {

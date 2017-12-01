@@ -36,7 +36,7 @@ export default class Navigation extends Component {
         this.setState({isAuthed:false});
     } else {
         console.log('Navigation::checkAuthResult - still authed');
-        let uname = this.prfClient.getAuthedUsername();
+        let uname = this.prfClient.getAuthedUsername(); 
         let uid = this.prfClient.getAuthedID();
         this.setState({isAuthed:true, username:uname});
     }
