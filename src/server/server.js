@@ -114,6 +114,22 @@ app.get('/classifiedsListView', function (req, res) {
     });
 });
 
+app.get('/posts/filter/username/:username', function (req,  res) {
+  let theUsername = req.params.username;
+  if(!theUsername){
+    console.log("############## WOOPS ##########");
+    throw (new Error('No username provided'));
+  } else {
+    connection.conn(function (dbConnection) {
+      connection.adsFilteredByUsername(dbConnection, theUsername, function (data) {
+        console.log("############## SENDING FILTERED ADS BACK ##########");
+        console.log("data");
+        res.send(data);
+      });
+    });
+  }
+});
+
 app.get('/displayDetailViewClassifiedAd', function (req, res) {
   //Recuperate the adId query string from the url:
   let id = req.query.adId;

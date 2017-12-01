@@ -72,7 +72,7 @@ export default class Home extends Component {
               orientation="vertical"/>
           </div>
         </section>
-        {(!this.prfClient.getAuthedUsername) ? (
+        {(!this.prfClient.getAuthedUsername()) ? (
           <SignupCTA />
         ) : null }
       </div>

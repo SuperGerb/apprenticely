@@ -9,6 +9,7 @@ const url = mongoURI || mongolocal;
 const fs = require("fs"); //Node's file system module
 const mongoCollection = process.env.MONGO_DBCOLLECTION; //"adverts"
 var dbConnection = null;
+var collection = null;
 
 var connectionObj = {
   conn: function (callback) {
@@ -22,6 +23,7 @@ var connectionObj = {
         }
         console.log("Connection open.\nDatabase " + dbName + " created.");
         dbConnection = db;
+        collection = db.collection(mongoCollection);
         callback(db);
       });
     } else {
@@ -39,20 +41,26 @@ var connectionObj = {
     }
   },
   displayListViewClassifieds: function (db, adLimit, callback) {
-    var collection = db.collection(mongoCollection);
+    // var collection = db.collection(mongoCollection);
     collection.find().sort({datePosted:1}).limit(adLimit).toArray().then(function (results) {
       callback(results);
     });
 
   },
+  adsFilteredByUsername: function (db, username, callback) {
+    // var collection = db.collection(mongoCollection);
+    collection.find({userId:username}).sort({datePosted:-1}).toArray().then(function(results) {
+      callback(results);
+    });
+  },
   displayDetailViewClassifiedAd: function (db, id, callback) {
-    var collection = db.collection(mongoCollection);
+    // var collection = db.collection(mongoCollection);
     collection.findOne({ classifiedId: id }).then(function (results) {
       callback(results);
     });
   },
   delete: function (db, callback) {
-    var collection = db.collection(mongoCollection);
+    // var collection = db.collection(mongoCollection);
     collection.findOneAndDelete({ 'title': 'Two' }, function (err, result) {
       var itemToDelete = result;
       console.log("Deleted item : " + itemToDelete);
@@ -60,18 +68,18 @@ var connectionObj = {
     });
   },
   insert: function (db, req, callback) {
-    var collection = db.collection(mongoCollection);
+    // var collection = db.collection(mongoCollection);
     collection.insert(req);
     callback("Success!");
   },
   update: function (db, req, callback) {
-    var collection = db.collection(mongoCollection);
+    // var collection = db.collection(mongoCollection);
     collection.updateOne({ "title": req.title2 }, { $set: { "description": req.description2 } });
     console.log("Req as seen by server is " + req.title2);
     callback("updated!");
   },
   clearAllDocs: function (db, callback) {
-    var collection = db.collection(mongoCollection);
+    // var collection = db.collection(mongoCollection);
     collection.deleteMany(function (err, result) {
       var itemsToDelete = result;
       var message = "Deleted all docs in the adverts collection : " + itemsToDelete;
@@ -94,9 +102,9 @@ var connectionObj = {
         console.log("Creating collection= " + table);
 
         //Create collection (if already exists, it will be ignored):
-        var collection = db.collection(table);
+        var testcollection = db.collection(table);
         var arrayOfTestData = json[i];
-        collection.insertMany(arrayOfTestData);
+        testcollection.insertMany(arrayOfTestData);
         console.log("File contents inserted sucessfully.");
       }
       callback(data);

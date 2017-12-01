@@ -34,19 +34,28 @@ export default class PrfProfileDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: 'profileDetailAbout'
-    };
+      listOfAds: []      
+    }
   }
 
-  // componentDidMount = () => {
-  //   //$('#divID').css("background-image", "url(/myimage.jpg)");
-  //   $('#profileDetailTabset a').click(function (e) {
-  //     e.preventDefault();
-  //     console.log('clicked!');
-  //     console.log($(this));
-  //     $(this).tab('show');
-  //   })
-  // }
+  componentDidMount = () => {
+    let scope = this;
+    fetch('/posts/filter/username/'+this.props.user.username, {
+      method: 'get'
+    }).then(function (response) {
+      if (response.status !== 200) {
+        console.log("Cannot fetch ads for this user.");
+      } else {
+        return response.json();
+      }
+    }).then(function (data) {
+      scope.setState({
+        listOfAds: data
+      });
+    }).catch(function (err) {
+      console.log("Cannot fetch ads for this user: ", err);
+    });
+  }
 
 
   render() {
@@ -77,61 +86,11 @@ export default class PrfProfileDetail extends Component {
     let linkList = this.props.user.hasOwnProperty("links") ? this.props.user.links : '';
     let linksFragment = { _id: this.props.user._id, links: linkList };
 
-    //%%%%%%%%%%%%%% Needs Tab %%%%%%%%%%%%%%%%
-
-    // DUMMY DATA temporarily
-    let ads = [
-      {
-        _id: "5a205d582093190e24ed2340",
-        classifiedId: "252235ca-4c5d-43a1-8976-f04621c8b9af",
-        title: "The curse of the Raku Pot",
-        description: "sfkd ;sldjf ;ldfj a;sldfasdfjsd lfkdrm aldkfj adfsifj a dfadsf",
-        location: "bavaria",
-        category: "Fine Art (Drawing, Painting, Sculpture, Printmaking)",
-        type: "wanted",
-        userId: "5a15a4297212040a608efdc1",
-        status: "open",
-        datePosted: "Thu Nov 30 2017 14:34:48 GMT-0500 (Eastern Standard Time)",
-        images: [
-          {
-            "imgName": "image0",
-            "imgFilename": "94b38624-167a-4c35-a3ab-2356bd40abf0.jpg"
-          }
-        ]
-      },
-      {
-        _id: "5a15ee09c558795bc4bb21be",
-        classifiedId: "0fed3c40-bf2c-47c6-bd9a-8872a4dae77c",
-        title: "Artist (hand-painting, car airbrush, murals, etc.)",
-        description: "Hello everyone! I'm graduated artist, working in the field of commercial art. If you are looking for something exclusive: such as hand-painting on canvas, car airbrush, murals, illustration or have an idea that you'd like to see come to life ... I can make it happen! Feel free to contact me for any questions. I am willing to give my service. Prices on all projects are negotiable! \r\nSERVICE:- Exclusive hand-painting on the canvas\r\n- Portrait from Photo- decoration Art / Interior Painting (wall)\r\n- Car/Helmet Painting (airbrush)\r\n- Illustration \r\n\r\nThank you and hoping to work with you!",
-        location: "Montreal",
-        category: "Fine Art (Drawing, Painting, Sculpture, Printmaking)",
-        type: "offered",
-        userId: "123",
-        status: "open",
-        datePosted: "Wed Nov 22 2017 16:37:13 GMT-0500 (EST)",
-        images: [
-          {
-            "imgName": "image0",
-            "imgFilename": "668b21b9-169b-4377-b8a7-3d6b589cb37a.JPG"
-          },
-          {
-            "imgName": "image1",
-            "imgFilename": "50fd5645-5204-4930-990b-60461020670e.JPG"
-          },
-          {
-            "imgName": "image2",
-            "imgFilename": "5d9c9d9b-3fed-4908-aceb-1037fa97d4d0.JPG"
-          }
-        ]
-      }
-    ];
-
-    let wanteds = ads.filter(ad => ad.type == "wanted").map((ad) => {
+    let wanteds = this.state.listOfAds.filter(ad => ad.type == "wanted").map((ad) => {
       return (<ClassifiedAdMicro adDetails={ad} key={ad.classifiedId} />);
     });
 
-    let offereds = ads.filter(ad => ad.type == "offered").map((ad) => {
+    let offereds = this.state.listOfAds.filter(ad => ad.type == "offered").map((ad) => {
       return (<ClassifiedAdMicro adDetails={ad} key={ad.classifiedId} />);
     });
 

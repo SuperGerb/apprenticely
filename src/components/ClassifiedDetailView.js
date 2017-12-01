@@ -5,7 +5,7 @@ import ImageGallery from './ImageGallery';
 import AdInquiryForm from './AdInquiryForm';
 import { calculateTimeElapsed } from '../app/utilities/ad-formatting.js';
 
-class ClassifiedDetailView extends Component {
+export default class ClassifiedDetailView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,25 +61,25 @@ class ClassifiedDetailView extends Component {
 
     //Format the images: 
     const baseImageUrl = "/images/classifiedImageUploads/";
-    let imageArray;
+    let imageArray = [];
     let firstImageSrc;
     if (images) {
       if (images.length == 0) {
         imageArray = [];
-        return;
+      } else {
+        firstImageSrc = baseImageUrl + images[0].imgFilename;
+        imageArray = images.map(function (obj, index) {
+          let imgSrc = baseImageUrl + obj.imgFilename;
+          if (index !== 0) {
+            return (
+              <div className="col-sm-12 side-image-item" key={index}>
+                <img className="card-img-side" src={imgSrc} alt="Image caption" />
+              </div>
+            )
+          }
+          //Or, if using the react-images (ImageGallery) module, return an array of objects with src keys, ex: [{src: imageSrc}, {src: imageSrc1}, {src: imageSrc2}]
+        });
       }
-      firstImageSrc = baseImageUrl + images[0].imgFilename;
-      imageArray = images.map(function (obj, index) {
-        let imgSrc = baseImageUrl + obj.imgFilename;
-        if (index !== 0) {
-          return (
-            <div className="col-sm-12 side-image-item" key={index}>
-              <img className="card-img-side" src={imgSrc} alt="Image caption" />
-            </div>
-          )
-        }
-        //Or, if using the react-images (ImageGallery) module, return an array of objects with src keys, ex: [{src: imageSrc}, {src: imageSrc1}, {src: imageSrc2}]
-      });
     }
 
     return (
@@ -111,4 +111,3 @@ class ClassifiedDetailView extends Component {
   }
 }
 
-export default ClassifiedDetailView;

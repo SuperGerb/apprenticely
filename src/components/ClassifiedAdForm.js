@@ -15,7 +15,6 @@ class ClassifiedAdForm extends Component {
     constructor(props) {
         super(props);
         this.prfClient = new PrfHttpClient();
-        let postOwner = this.prfClient.getAuthedUsername();
         this.state = {
             submitted: false,
             classifiedId: "",
@@ -27,7 +26,7 @@ class ClassifiedAdForm extends Component {
             type: "",
             images: [],
             previewImage: "",
-            userId: postOwner || "",
+            userId: "",
             status: "",
             datePosted: "",
             currentAd: {}
@@ -122,7 +121,7 @@ class ClassifiedAdForm extends Component {
             category: this.state.category,
             type: this.state.type,
             images: this.state.images,
-            userId: this.postOwner || "", //"123",
+            userId: this.prfClient.getAuthedUsername() || "", //"123",
             status: "open",
             datePosted: currentDate
         }
@@ -148,7 +147,7 @@ class ClassifiedAdForm extends Component {
                 formData.append(key, currentClassifiedAd[key])
             }
         });
- 
+
         // For testing:
         // console.log("Contents of FormData: ");
         // for (let pair of formData.entries()) {
@@ -192,7 +191,7 @@ class ClassifiedAdForm extends Component {
                                 <input type="hidden" value={this.state.classifiedId} className="form-control" id="classifiedId" name="classifiedId" />
                                 <label htmlFor="title" className="sr-only">Title</label>
                                 <div className="input-group">
-                                    <input type="text" value={this.state.title} className="form-control" id="title" name="title" placeholder="Title" aria-describedby="basic-addon1" onChange={this.handleChangeInput} required/>
+                                    <input type="text" value={this.state.title} className="form-control" id="title" name="title" placeholder="Title" aria-describedby="basic-addon1" onChange={this.handleChangeInput} required />
                                 </div>
                                 <label htmlFor="description" className="sr-only">Description</label>
                                 <div className="input-group">
@@ -200,7 +199,7 @@ class ClassifiedAdForm extends Component {
                                 </div>
                                 <label htmlFor="location" className="sr-only">Location</label>
                                 <div className="input-group">
-                                    <input type="text" value={this.state.location} className="form-control" id="location" name="location" placeholder="Location" aria-describedby="basic-addon1" onChange={this.handleChangeInput} required/>
+                                    <input type="text" value={this.state.location} className="form-control" id="location" name="location" placeholder="Location" aria-describedby="basic-addon1" onChange={this.handleChangeInput} required />
                                 </div>
                                 <label htmlFor="type" className="sr-only">Offered or Wanted</label>
                                 <div className="input-group">
