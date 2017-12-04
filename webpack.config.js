@@ -31,7 +31,7 @@ module.exports = {
                 query: {
                     presets: ["es2015", "react"],
                     //Required for transforming es2015 static class properties and as properties declared with the es2016 property initializer syntax. (required for interpreting es6 arrow functions):
-                    plugins: ["transform-class-properties", "transform-decorators-legacy"]
+                    plugins: ["transform-class-properties", "transform-decorators-legacy","transform-object-rest-spread"]
                 }
             }
         ]

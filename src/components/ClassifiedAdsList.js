@@ -3,21 +3,22 @@ import ClassifiedAd from './ClassifiedAd';
 import ClassifiedAdMicro from './ClassifiedAdMicro';
 import { Link } from 'react-router-dom';
 import ClassifiedDetailView from './ClassifiedDetailView';
+import { connect } from 'react-redux';
 
-export default class ClassifiedAdsList extends Component {
+class ClassifiedAdsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listOfAds: [] 
+      listOfAds: []
     };
   }
 
   componentDidMount() {
     const scope = this;
     let adLimit;
-    if(this.props.adLimit !== undefined){
+    if (this.props.adLimit !== undefined) {
       adLimit = this.props.adLimit;
-    }else{
+    } else {
       adLimit = 0;  //
     }
     fetch('/classifiedsListView?adLimit=' + this.props.adLimit, {
@@ -50,7 +51,23 @@ export default class ClassifiedAdsList extends Component {
     return (
       <ul className="row classified-list">
         {ads}
+        <p onClick={this.props.onSearch}>{this.props.search}</p>
       </ul>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    search: state.search
+  }
+}
+
+//Change the state(using an action, which takes a type and payload):
+const mapDispatchToProps = dispatch => {
+  return {
+    onSearch: () => dispatch({ type: "UPDATE_SEARCH", value: "Bye" })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ClassifiedAdsList);
