@@ -52,7 +52,7 @@ export default class Home extends Component {
     return (
       <div>
         <CreateClassifiedAdButton />
-        <section className="appr-bgimage short">
+        <section className="appr-bgimage">
           {message ? <div className="confirmation-message-box"><p>{message}</p></div> : null}
           <div className="row appr-hero width-constrained">
             <div className="appr-hero-box">

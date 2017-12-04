@@ -36,7 +36,6 @@ export default class PrfProfilePage extends Component {
   }
 
   onProfilesFetched = (responseData) => {
-    console.log("PrfProfilePage::onProfilesFetched");
     if(!responseData) {
       this.setState({alertMessage:"We've encountered a problem. Please try again."});
       return;

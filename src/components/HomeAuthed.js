@@ -16,7 +16,7 @@ export default class Home extends Component {
   }
 
   componentDidMount = () => {
-    this.getLatestProfiles();
+    this.getLatestProfiles(5);
     this.fadeOutMessageBox();
   }
 
@@ -25,8 +25,6 @@ export default class Home extends Component {
   }
 
   populateList = (responseData) => {
-    console.log("**************************|", responseData);
-
     if (!responseData) {
       console.log("Error retrieving list of profiles!");
       return;  

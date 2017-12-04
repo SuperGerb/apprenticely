@@ -66,7 +66,9 @@ export default class PrfWidgetAvatar extends Component {
 
   // ######################### Nano Event Handlers ##################
   resetAvatarSrc = () => {//discards edits, returns to original view
-    this.setState({avatarSrc: this.snapshot.avatarSrc, updatingAvatarSrc:false});
+    this.setState({
+      avatarSrc: this.props.userFragment.avatarSrc || this.noAvatarBase64Img,
+      updatingAvatarSrc:false});
   }
 
   // ######################### Micro Event Handlers (events internal to component) ########################

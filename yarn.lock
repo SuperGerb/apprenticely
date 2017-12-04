@@ -3624,15 +3624,15 @@ process@^0.11.1, process@^0.11.10:
   version "0.11.10"
   resolved "https://registry.yarnpkg.com/process/-/process-0.11.10.tgz#7332300e840161bda3e69a1d1d91a7d4bc16f182"
 
-profilic-client@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/profilic-client/-/profilic-client-0.0.7.tgz#8343c9beeebbf0b3b0fa32164df693af5e74bc8a"
+profilic-client@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/profilic-client/-/profilic-client-0.0.8.tgz#3f3717d6ce15739984194064739ea7969ad6e5d4"
   dependencies:
     axios "^0.16.2"
 
-profilic-server@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/profilic-server/-/profilic-server-0.0.4.tgz#b361caa7a11f2088aa5c4804d83d1b6ba8ae674f"
+profilic-server@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/profilic-server/-/profilic-server-0.0.5.tgz#4f28b8c4ea8ad0191841fd013d0dfba395c81639"
   dependencies:
     bcryptjs "^2.4.3"
     body-parser "^1.18.2"

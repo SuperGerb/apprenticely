@@ -94,6 +94,23 @@ export default class PrfProfileDetail extends Component {
       return (<ClassifiedAdMicro adDetails={ad} key={ad.classifiedId} />);
     });
 
+    let thirdPerson = {
+      wantedsPrompt: 'is on the lookout for a few things. Maybe you can lend them a hand?',
+      offeredsPrompt: 'has something to offer! Have a look below - maybe they can help you!',
+      noWantedItemsPrompt: 'hasn\'t posted any needs at this time.',
+      noOfferedItemsPrompt: 'isn\'t offering any items at this time.'
+    };
+
+    let secondPerson = {
+      wantedsPrompt: 'have posted the following notices about things you want or need:',
+      offeredsPrompt: 'have posted the following notices about things you\'re offering:',
+      noWantedItemsPrompt: 'haven\'t posted any needs at this time.',
+      noOfferedItemsPrompt: 'aren\'t offering any items at this time.'
+    };
+
+    let copydeck = (this.props.ownerIsViewer) ? secondPerson : thirdPerson;
+    let viewerLabel = (this.props.ownerIsViewer) ? 'You' : (<span><b>{this.props.user.username}</b></span>);
+    
     return (
       <div className="card-group prf-details">
         {/* card 1: user avatar and links */}
@@ -124,12 +141,18 @@ export default class PrfProfileDetail extends Component {
                 <div className="tab-pane" id="needsContent" role="tabpanel" aria-labelledby="profileDetailNeeds">
                   <div className="card prf-infobox">
                     <div className="card-body">
+                      {(wanteds.length > 0) ? (
                       <div className="list-group-item list-group-item-action flex-column align-items-start">
-                        <p className="appr-prompt wanted"><b>{this.props.user.username}</b> is on the lookout for a few things. Maybe you can lend a hand?</p>
+                        <p className="appr-prompt wanted">{viewerLabel}&nbsp;{copydeck.wantedsPrompt}</p>
                         <div>
                           {wanteds}
                         </div>
                       </div>
+                      ) : (
+                      <div className="list-group-item list-group-item-action flex-column align-items-start">
+                        <p className="appr-prompt wanted">{viewerLabel}&nbsp;{copydeck.noWantedItemsPrompt}</p>
+                      </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -138,12 +161,18 @@ export default class PrfProfileDetail extends Component {
                 <div className="tab-pane" id="offersContent" role="tabpanel" aria-labelledby="profileDetailOffers">
                   <div className="card prf-infobox">
                     <div className="card-body">
+                    {(offereds.length > 0) ? (
                       <div className="list-group-item list-group-item-action flex-column align-items-start">
-                        <p className="appr-prompt offered"><b>{this.props.user.username}</b> has a few things to offer!</p>
+                        <p className="appr-prompt offered">{viewerLabel}&nbsp;{copydeck.offeredsPrompt}</p>
                         <div>
                           {offereds}
                         </div>
                       </div>
+                    ) : (
+                      <div className="list-group-item list-group-item-action flex-column align-items-start">
+                      <p className="appr-prompt offered">{viewerLabel}&nbsp;{copydeck.noOfferedItemsPrompt}</p>
+                    </div>
+                    )}
                     </div>
                   </div>
                 </div>
