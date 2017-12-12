@@ -4,12 +4,13 @@ import ClassifiedAdMicro from './ClassifiedAdMicro';
 import { Link } from 'react-router-dom';
 import ClassifiedDetailView from './ClassifiedDetailView';
 import { connect } from 'react-redux';
+import * as actionTypes from '../store/actions/actionTypes.js';
 
 class ClassifiedAdsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      listOfAds: []
+      listOfAds: [] 
     };
   }
 
@@ -38,6 +39,8 @@ class ClassifiedAdsList extends Component {
     });
   }
 
+
+
   render() {
     const ads = this.state.listOfAds.map(function (value, index) {
       return (
@@ -51,7 +54,9 @@ class ClassifiedAdsList extends Component {
     return (
       <ul className="row classified-list">
         {ads}
-        <p onClick={this.props.onSearch}>{this.props.search}</p>
+        {/* <input type="text" id="testInput" value={this.props.search} onChange={this.props.onSearch}/>
+
+        <p onClick={this.props.onSearch}>{this.props.search}</p> */}
       </ul>
     );
   }
@@ -66,8 +71,9 @@ const mapStateToProps = state => {
 //Change the state(using an action, which takes a type and payload):
 const mapDispatchToProps = dispatch => {
   return {
-    onSearch: () => dispatch({ type: "UPDATE_SEARCH", value: "Bye" })
+    onSearch: (event) => dispatch({ type: actionTypes.UPDATE_SEARCH, value: event.target.value })
   }
 }
 
+//connect is what connects React to Redux. Comes from React-Redux
 export default connect(mapStateToProps, mapDispatchToProps)(ClassifiedAdsList);

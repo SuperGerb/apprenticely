@@ -82,7 +82,7 @@ app.get('/accessTaxonomy', function (req, res) {
   });
 });
 
-app.get('/test', function (req, res) {
+/*Not in use: app.get('/test', function (req, res) {
   connection.conn(function (dbConnection) {
     res.send(dbConnection.databaseName);
   });
@@ -102,7 +102,7 @@ app.get('/loadTestData', function (req, res) {
       res.send(data);
     });
   });
-});
+});*/
 
 app.get('/classifiedsListView', function (req, res) {
   //Recuperate the ad limit from the url:

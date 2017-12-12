@@ -24,6 +24,10 @@ export default class App extends Component {
     // this.prfClient = new PrfHttpClient();
   }
 
+  componentDidMount(){
+    console.log("App has mounted!");
+  }
+
   render() {
     return (
       <div>
